@@ -23,6 +23,7 @@ export class BracketvisualizerComponent implements OnInit {
 
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
+      const datat = event.container.data;
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
   }
