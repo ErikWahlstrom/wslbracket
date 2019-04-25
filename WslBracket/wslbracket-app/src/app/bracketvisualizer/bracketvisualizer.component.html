@@ -1,20 +1,6 @@
-<div class="list-container">
-
-  <div class="todo-container column-container">
-    <div class="list"
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="surfers"
-    (cdkDropListDropped)="onDrop($event)" >
-      <h2>Surfers to rank</h2>
-      <mat-card *ngFor="let surfer of surfers" cdkDrag>
-        <mat-card-header>
-          <mat-card-title>
-            Name: {{surfer.name}}
-          </mat-card-title>
-          <mat-card-subtitle>Rank: {{surfer.rank}}</mat-card-subtitle>
-        </mat-card-header>
-      </mat-card>
+<div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
+    <div class="example-box" *ngFor="let surfer of surfers" cdkDrag>
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      {{surfer.name}} <br> rank: {{surfer.rank}}
     </div>
   </div>
-</div>

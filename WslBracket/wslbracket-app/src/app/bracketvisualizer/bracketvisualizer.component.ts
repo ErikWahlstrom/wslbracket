@@ -15,6 +15,8 @@ export class BracketvisualizerComponent implements OnInit {
     this.surfers = [
       new Surfer('Michel Bourez', 10),
       new Surfer('Gabriel Medina', 1),
+      new Surfer('Italo Ferreira', 4),
+      new Surfer('Owen Wright', 2),
       new Surfer('Julian Wilson', 3), ];
   }
 
@@ -23,8 +25,10 @@ export class BracketvisualizerComponent implements OnInit {
 
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      const datat = event.container.data;
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
+      for (let index = 0; index < this.surfers.length; index++) {
+        this.surfers[index].rank = index + 1;
+      }
     }
   }
 }
