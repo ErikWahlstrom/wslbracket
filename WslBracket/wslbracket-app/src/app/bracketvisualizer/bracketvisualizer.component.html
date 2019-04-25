@@ -1,6 +1,8 @@
 <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
-    <div class="example-box" *ngFor="let surfer of surfers" cdkDrag>
+  <ng-container *ngFor="let surfer of surfers">
+    <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
       <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
       {{surfer.name}} <br> rank: {{surfer.rank}} <br> tier: {{surfer.tier}}
     </div>
-  </div>
+  </ng-container>
+</div>

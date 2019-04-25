@@ -35,7 +35,7 @@ export class BracketvisualizerComponent implements OnInit {
           surfer.tier = 1;
         } else if (rank <= 8) {
           surfer.tier = 2;
-        } else{
+        } else {
           surfer.tier = 3;
         }
 
