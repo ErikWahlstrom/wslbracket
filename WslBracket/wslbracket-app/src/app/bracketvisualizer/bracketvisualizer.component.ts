@@ -15,7 +15,7 @@ export class BracketvisualizerComponent implements OnInit {
     this.surfers = [
       new Surfer('Michel Bourez', 10),
       new Surfer('Gabriel Medina', 1),
-      new Surfer('Julian Wilson', 3),];
+      new Surfer('Julian Wilson', 3), ];
   }
 
   ngOnInit() {
