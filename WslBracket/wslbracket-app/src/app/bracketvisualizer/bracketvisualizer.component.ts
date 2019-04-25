@@ -7,9 +7,13 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   templateUrl: './bracketvisualizer.component.html',
   styleUrls: ['./bracketvisualizer.component.scss']
 })
+
 export class BracketvisualizerComponent implements OnInit {
   surfers: Surfer[];
   rankedSurfers: Surfer[];
+  tier1Limit = 4;
+  tier2Limit = 8;
+  tier3Limit = 26;
 
   constructor() {
     this.surfers = [
@@ -31,14 +35,15 @@ export class BracketvisualizerComponent implements OnInit {
         const rank = index + 1;
         const surfer = this.surfers[index];
         surfer.rank = rank;
-        if (rank <= 4) {
+        if (rank <= this.tier1Limit) {
           surfer.tier = 1;
-        } else if (rank <= 8) {
+        } else if (rank <= this.tier2Limit) {
           surfer.tier = 2;
-        } else {
+        } else if (rank <= this.tier3Limit) {
           surfer.tier = 3;
+        } else {
+          surfer.tier = 4;
         }
-
       }
     }
   }
