@@ -21,12 +21,18 @@ export class BracketvisualizerComponent implements OnInit {
       new Surfer('Gabriel Medina', 1, 1),
       new Surfer('Italo Ferreira', 4, 1),
       new Surfer('Owen Wright', 2, 1),
+      new Surfer('Kolohe Andino', 15, 2),
+      new Surfer('Ryan Callinan', 16, 2),
       new Surfer('Jadson Andre', 23, 2),
       new Surfer('Julian Wilson', 3, 1), ];
   }
 
   ngOnInit() {
   }
+
+  GenerateSeeding() {
+    const seedingBracket = new SeedingBracket(this.surfers);
+    }
 
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -46,6 +52,31 @@ export class BracketvisualizerComponent implements OnInit {
         }
       }
     }
+  }
+}
+
+export class SeedingBracket {
+  heat5: ThreeManHeat;
+  heat6: ThreeManHeat;
+  constructor(surfers: Surfer[]) {
+    this.heat6 = new ThreeManHeat(surfers[0], surfers[4], surfers[5]);
+    this.heat5 = new ThreeManHeat(surfers[5], surfers[6], surfers[7]);
+  }
+}
+
+export class ThreeManHeat {
+  constructor(heatnumber: number, surfer1: Surfer, surfer2: Surfer, surfer3: Surfer) {
+    this.heatnumber = heatnumber;
+    this.surfers = [new HeatSurfer(1, surfer1), new HeatSurfer(2, surfer2), new HeatSurfer(3, surfer3)];
+  }
+}
+
+export class HeatSurfer {
+  heatRank: number;
+  surfer: Surfer;
+  constructor(heatRank: number, surfer: Surfer) {
+    this.heatRank = heatRank;
+    this.surfer = surfer;
   }
 }
 
