@@ -13,11 +13,12 @@ export class BracketvisualizerComponent implements OnInit {
 
   constructor() {
     this.surfers = [
-      new Surfer('Michel Bourez', 10),
-      new Surfer('Gabriel Medina', 1),
-      new Surfer('Italo Ferreira', 4),
-      new Surfer('Owen Wright', 2),
-      new Surfer('Julian Wilson', 3), ];
+      new Surfer('Michel Bourez', 10, 2),
+      new Surfer('Gabriel Medina', 1, 1),
+      new Surfer('Italo Ferreira', 4, 1),
+      new Surfer('Owen Wright', 2, 1),
+      new Surfer('Jadson Andre', 23, 2),
+      new Surfer('Julian Wilson', 3, 1), ];
   }
 
   ngOnInit() {
@@ -27,7 +28,17 @@ export class BracketvisualizerComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
       for (let index = 0; index < this.surfers.length; index++) {
-        this.surfers[index].rank = index + 1;
+        const rank = index + 1;
+        const surfer = this.surfers[index];
+        surfer.rank = rank;
+        if (rank <= 4) {
+          surfer.tier = 1;
+        } else if (rank <= 8) {
+          surfer.tier = 2;
+        } else{
+          surfer.tier = 3;
+        }
+
       }
     }
   }
