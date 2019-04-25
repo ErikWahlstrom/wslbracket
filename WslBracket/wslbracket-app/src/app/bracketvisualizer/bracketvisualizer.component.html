@@ -1,3 +1,36 @@
-<p>
-  bracketvisualizer works!
-</p>
+<div class="list-container">
+
+  <div class="todo-container column-container">
+    <div class="list"
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="surfers"
+    [cdkDropListConnectedTo]="[rankedList]"
+    (cdkDropListDropped)="onDrop($event)" >
+      <h2>Tech to learn</h2>
+      <mat-card *ngFor="let surfer of surfers" cdkDrag>
+        <mat-card-header>
+          <mat-card-title>{{surfer.name}}</mat-card-title>
+          <mat-card-subtitle>{{surfer.rank}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="done-container column-container">
+    <div class="list"
+    cdkDropList
+    #rankedList="cdkDropList"
+    [cdkDropListData]="surfers"
+    [cdkDropListConnectedTo]="[todoList]"
+    (cdkDropListDropped)="onDrop($event)">
+      <h2>Tech learned</h2>
+      <mat-card *ngFor="let surfer of rankedSurfers">
+        <mat-card-header>
+          <mat-card-title>{{surfer.name}}</mat-card-title>
+          <mat-card-subtitle>{{surfer.rank}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div>

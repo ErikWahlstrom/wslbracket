@@ -3,7 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualizer.component';
+
+
 
 @NgModule({
   declarations: [
@@ -12,7 +17,10 @@ import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualize
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    AppRoutingModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

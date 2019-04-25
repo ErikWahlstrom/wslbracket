@@ -4,6 +4,10 @@ import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualize
 
 const routes: Routes = [
   { path: 'bracket-visualizer', component: BracketvisualizerComponent },
+  { path: '',
+    redirectTo: '/bracket-visualizer',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

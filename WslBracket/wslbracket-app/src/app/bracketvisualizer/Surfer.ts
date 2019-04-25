@@ -1,4 +1,8 @@
 export class Surfer {
-  constructor(private name: string, private rank: number) {
+  name: string;
+  rank: number;
+  constructor(name: string, rank: number) {
+    this.name = name;
+    this.rank = rank;
   }
 }
