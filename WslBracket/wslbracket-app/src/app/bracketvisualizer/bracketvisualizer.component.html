@@ -7,3 +7,14 @@
   </ng-container>
 </div>
 <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
+<div>Seeding Heats:</div>
+<div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)">
+  <ng-container *ngIf="seedingBracket?.heat6?.surfers">
+    <ng-container *ngFor="let surfer of seedingBracket.heat6.surfers">
+      <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        {{surfer.surfer.name}} <br> rank: {{surfer.surfer.rank}} <br> heatRank: {{surfer.heatRank}}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
