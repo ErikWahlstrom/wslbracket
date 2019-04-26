@@ -2,10 +2,8 @@ export class Surfer {
   name: string;
   rank: number;
   tier: number;
-  constructor(name: string, rank: number, tier: number) {
+  constructor(name: string) {
     this.name = name;
-    this.rank = rank;
-    this.tier = tier;
   }
 }
 

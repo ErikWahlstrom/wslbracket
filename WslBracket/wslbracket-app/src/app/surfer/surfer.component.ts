@@ -10,7 +10,6 @@ export class SurferComponent implements OnInit {
   @Input() public surfer: Surfer;
 
   constructor() {
-    this.surfer = new Surfer('Unknown Surfer', 1, 2);
   }
 
   ngOnInit( ) {
