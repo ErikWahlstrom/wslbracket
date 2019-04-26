@@ -7,12 +7,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualizer.component';
-
-
+import { SurferComponent } from './surfer/surfer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SurferComponent,
     BracketvisualizerComponent
   ],
   imports: [
@@ -20,9 +20,10 @@ import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualize
     BrowserAnimationsModule,
     MatCardModule,
     AppRoutingModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [SurferComponent]
 })
 export class AppModule { }

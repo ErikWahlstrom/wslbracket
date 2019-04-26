@@ -18,7 +18,8 @@
         <ng-container *ngFor="let surfer of heat.surfers">
           <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-            {{surfer.surfer.name}} <br> rank: {{surfer.surfer.rank}} <br> heatRank: {{surfer.heatRank}}
+            <app-surfer [surfer]="surfer.surfer"></app-surfer>
+            <div>heatRank: {{surfer.heatRank}}</div>
           </div>
         </ng-container>
       </div>
