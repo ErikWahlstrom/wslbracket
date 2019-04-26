@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Surfer, SeedingBracket } from '../modeldata/Surfer';
+import { Surfer, SeedingBracket, HeatSurfer } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -57,20 +57,11 @@ export class BracketvisualizerComponent implements OnInit {
 
   onDropSeed(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
-      for (let index = 0; index < this.surfers.length; index++) {
+      const arrayWithData = event.container.data;
+       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
+       for (let index = 0; index < arrayWithData.length; index++) {
         const rank = index + 1;
-        const surfer = this.surfers[index];
-        surfer.rank = rank;
-        if (rank <= this.tier1Limit) {
-          surfer.tier = 1;
-        } else if (rank <= this.tier2Limit) {
-          surfer.tier = 2;
-        } else if (rank <= this.tier3Limit) {
-          surfer.tier = 3;
-        } else {
-          surfer.tier = 4;
-        }
+        (arrayWithData[index] as unknown as HeatSurfer).heatRank = rank;
       }
     }
   }
