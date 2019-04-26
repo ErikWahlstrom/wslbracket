@@ -30,10 +30,6 @@ export class BracketvisualizerComponent implements OnInit {
   ngOnInit() {
   }
 
-  GenerateSeeding() {
-    this.seedingBracket = new SeedingBracket(this.surfers);
-    }
-
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
@@ -52,7 +48,12 @@ export class BracketvisualizerComponent implements OnInit {
         }
       }
     }
+    this.GenerateSeeding();
   }
+
+  GenerateSeeding() {
+    this.seedingBracket = new SeedingBracket(this.surfers);
+    }
 
   onDropSeed(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -78,9 +79,11 @@ export class BracketvisualizerComponent implements OnInit {
 export class SeedingBracket {
   heat5: ThreeManHeat;
   heat6: ThreeManHeat;
+  heats: ThreeManHeat[];
   constructor(surfers: Surfer[]) {
     this.heat6 = new ThreeManHeat(6, surfers[0], surfers[4], surfers[5]);
     this.heat5 = new ThreeManHeat(1, surfers[5], surfers[6], surfers[7]);
+    this.heats = [this.heat5, this.heat6];
   }
 }
 
