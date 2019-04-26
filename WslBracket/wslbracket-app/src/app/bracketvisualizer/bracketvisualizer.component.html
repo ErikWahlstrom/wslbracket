@@ -4,7 +4,7 @@
     <ng-container *ngFor="let surfer of surfers">
       <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        {{surfer.name}} <br> rank: {{surfer.rank}} <br> tier: {{surfer.tier}}
+        {{surfer.name}} <br> rank: {{surfer.rank}} tier: {{surfer.tier}}
       </div>
     </ng-container>
   </div>
