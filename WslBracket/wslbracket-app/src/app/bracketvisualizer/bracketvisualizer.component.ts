@@ -17,9 +17,10 @@ export class BracketvisualizerComponent implements OnInit {
 
   constructor() {
     this.surfers = [
+
       new Surfer('Gabriel Medina'),
       new Surfer('Julian Wilson'),
-      new Surfer('Felipe Toledo'),
+      new Surfer('Filipe Toledo'),
       new Surfer('Italo Ferreira'),
       new Surfer('Jordy Smith'),
       new Surfer('Owen Wright'),
@@ -29,22 +30,23 @@ export class BracketvisualizerComponent implements OnInit {
       new Surfer('Kanoa Igarashi'),
       new Surfer('Kolohe Andino'),
       new Surfer('Mikey Wright'),
+      new Surfer('John John Florence'),
       new Surfer('Willian Cardoso'),
       new Surfer('Sebastian Zietz'),
       new Surfer('Michael Rodrigues'),
       new Surfer('Jeremy Flores'),
       new Surfer('Adrian Buchan'),
       new Surfer('Griffin Colapinto'),
-      new Surfer('Adriano de Souza'),
       new Surfer('Ezekiel Lau'),
       new Surfer('Yago Dora'),
       new Surfer('Joan Duru'),
-      new Surfer('Kelly Slater'),
+      new Surfer('Seth Moniz'),
       new Surfer('Ryan Callinan'),
       new Surfer('Jadson Andre'),
       new Surfer('Soli Bailey'),
       new Surfer('Jack Freestone'),
       new Surfer('Caio Ibelli'),
+      new Surfer('Kelly Slater'),
       new Surfer('Reef Heazlewood'),
       new Surfer('Mateus Herdy'),
       new Surfer('Jadson Andre'),
@@ -57,6 +59,8 @@ export class BracketvisualizerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.SetRankings();
+    this.GenerateSeeding();
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
