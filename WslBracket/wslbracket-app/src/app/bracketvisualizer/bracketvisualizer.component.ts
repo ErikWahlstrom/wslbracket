@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Surfer, SeedingBracket, HeatSurfer, LosersBracket } from '../modeldata/Surfer';
+import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32 } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -15,6 +15,7 @@ export class BracketvisualizerComponent implements OnInit {
   tier2Limit = 8;
   tier3Limit = 26;
   losersRound: LosersBracket;
+  roundOf32: RoundOf32;
 
   constructor() {
     this.surfers = [
@@ -64,9 +65,15 @@ export class BracketvisualizerComponent implements OnInit {
     this.RerankHeats();
     this.GenerateLosersRound();
     this.RerankLosers();
+    this.GenerateR32();
   }
+
   GenerateLosersRound() {
     this.losersRound = new LosersBracket(this.seedingBracket);
+  }
+
+  GenerateR32() {
+    this.roundOf32 = new RoundOf32(this.seedingBracket, this.losersRound);
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
@@ -102,8 +109,7 @@ export class BracketvisualizerComponent implements OnInit {
     this.losersRound.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-          moveItemInArray(heat.heatSurfers, 0, 2);
-          moveItemInArray(heat.heatSurfers, 0, 1);
+        moveItemInArray(heat.heatSurfers, 2, 0);
           this.ReorderHeat(heat.heatSurfers);
           break;
           case 2:

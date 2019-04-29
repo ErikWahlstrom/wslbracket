@@ -45,3 +45,12 @@
   </ng-container>
   <Button class="mat-button" (click)="RerankLosers()">Rerank heats from results</Button>
 </div>
+
+<div class="round-32">
+  Ranking after seeding round:
+<ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
+  <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'">
+    <app-surfer [surfer]="surfer" ></app-surfer>
+  </div>
+</ng-container>
+</div>
