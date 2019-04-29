@@ -175,6 +175,7 @@ export class BracketvisualizerComponent implements OnInit {
       const arrayWithData = event.container.data;
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
+      this.GenerateLosersRound();
     }
   }
 
