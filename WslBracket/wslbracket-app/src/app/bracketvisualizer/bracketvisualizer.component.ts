@@ -12,8 +12,8 @@ export class BracketvisualizerComponent implements OnInit {
   surfers: Surfer[];
   seedingBracket: SeedingBracket;
   tier1Limit = 4;
-  tier2Limit = 8;
-  tier3Limit = 26;
+  tier2Limit = 12;
+  tier3Limit = 24;
   losersRound: LosersBracket;
   roundOf32: RoundOf32;
 
