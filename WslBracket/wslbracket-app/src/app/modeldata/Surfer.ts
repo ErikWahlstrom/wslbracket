@@ -43,3 +43,21 @@ export class SeedingBracket {
       new ThreeManHeat(12, surfers[11], surfers[12], surfers[24])];
   }
 }
+
+export class LosersBracket {
+  heats: ThreeManHeat[];
+  constructor(surfers: SeedingBracket) {
+    const orderedArray = this.getSurfersFromSeeding(surfers);
+    this.heats = [
+      new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
+      new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
+      new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
+  }
+
+  getSurfersFromSeeding(surfers: SeedingBracket) {
+    const unorderedSurfers = surfers.heats.map(x => x.heatSurfers[2].surfer);
+    const ordered = unorderedSurfers.sort((x, y) => x.rank - y.rank);
+    return ordered;
+  }
+}

@@ -27,3 +27,21 @@
   </ng-container>
   <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
 </div>
+
+<div class="losing-heat">Losing Heats:
+  <ng-container *ngIf="losersRound?.heats">
+    <div *ngFor="let heat of losersRound.heats">
+      <div>Heat: {{heat.heatnumber}}</div>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)" [cdkDropListData]="heat.heatSurfers">
+        <ng-container *ngFor="let surfer of heat.heatSurfers">
+          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <app-surfer [surfer]="surfer.surfer" ></app-surfer>
+            <div>heatRank: {{surfer.heatRank}}</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <Button class="mat-button" (click)="RerankLosers()">Rerank heats from results</Button>
+</div>

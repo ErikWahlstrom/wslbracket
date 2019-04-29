@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Surfer, SeedingBracket, HeatSurfer } from '../modeldata/Surfer';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Surfer, SeedingBracket, HeatSurfer, LosersBracket } from '../modeldata/Surfer';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -14,6 +14,7 @@ export class BracketvisualizerComponent implements OnInit {
   tier1Limit = 4;
   tier2Limit = 8;
   tier3Limit = 26;
+  losersRound: LosersBracket;
 
   constructor() {
     this.surfers = [
@@ -61,6 +62,11 @@ export class BracketvisualizerComponent implements OnInit {
     this.SetRankings();
     this.GenerateSeeding();
     this.RerankHeats();
+    this.GenerateLosersRound();
+    this.RerankLosers();
+  }
+  GenerateLosersRound() {
+    this.losersRound = new LosersBracket(this.seedingBracket);
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
@@ -92,6 +98,24 @@ export class BracketvisualizerComponent implements OnInit {
     this.seedingBracket = new SeedingBracket(this.surfers);
   }
 
+  RerankLosers() {
+    this.losersRound.heats.forEach(heat => {
+      switch (heat.heatnumber) {
+        case 1:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 2:
+          break;
+          case 3:
+          break;
+          case 4:
+          break;
+      }
+    });
+  }
+
   RerankHeats() {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
@@ -101,43 +125,43 @@ export class BracketvisualizerComponent implements OnInit {
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 2:
-        moveItemInArray(heat.heatSurfers, 0, 2);
-        moveItemInArray(heat.heatSurfers, 0, 1);
-          this.ReorderHeat(heat.heatSurfers);
-          break;
-          case 3:
-        moveItemInArray(heat.heatSurfers, 0, 1);
-          this.ReorderHeat(heat.heatSurfers);
-          break;
-          case 4:
+          moveItemInArray(heat.heatSurfers, 0, 2);
           moveItemInArray(heat.heatSurfers, 0, 1);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 5:
+        case 3:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 4:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 5:
           moveItemInArray(heat.heatSurfers, 0, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 6:
+        case 6:
           break;
-          case 7:
+        case 7:
           this.ReorderHeat(heat.heatSurfers);
           moveItemInArray(heat.heatSurfers, 0, 1);
           break;
-          case 8:
+        case 8:
           break;
-          case 9:
+        case 9:
           moveItemInArray(heat.heatSurfers, 0, 1);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 10:
+        case 10:
           moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 11:
+        case 11:
           moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 12:
+        case 12:
           break;
 
         default:
