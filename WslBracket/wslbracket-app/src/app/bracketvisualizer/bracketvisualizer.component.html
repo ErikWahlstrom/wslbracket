@@ -14,8 +14,8 @@
   <ng-container *ngIf="seedingBracket?.heats">
     <div *ngFor="let heat of seedingBracket.heats">
       <div>Heat: {{heat.heatnumber}}</div>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)" [cdkDropListData]="heat.surfers">
-        <ng-container *ngFor="let surfer of heat.surfers">
+      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)" [cdkDropListData]="heat.heatSurfers">
+        <ng-container *ngFor="let surfer of heat.heatSurfers">
           <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <app-surfer [surfer]="surfer.surfer" ></app-surfer>
@@ -25,4 +25,5 @@
       </div>
     </div>
   </ng-container>
+  <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
 </div>

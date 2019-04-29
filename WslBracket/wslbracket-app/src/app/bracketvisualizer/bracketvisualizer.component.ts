@@ -24,7 +24,7 @@ export class BracketvisualizerComponent implements OnInit {
       new Surfer('Italo Ferreira'),
       new Surfer('Jordy Smith'),
       new Surfer('Owen Wright'),
-      new Surfer('Connor Coffin'),
+      new Surfer('Conner Coffin'),
       new Surfer('Michel Bourez'),
       new Surfer('Wade Carmichael'),
       new Surfer('Kanoa Igarashi'),
@@ -54,12 +54,13 @@ export class BracketvisualizerComponent implements OnInit {
       new Surfer('Caio Ibelli'),
       new Surfer('Reef Heazlewood'),
       new Surfer('Mateus Herdy'),
-       ];
+    ];
   }
 
   ngOnInit() {
     this.SetRankings();
     this.GenerateSeeding();
+    this.RerankHeats();
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
@@ -89,16 +90,74 @@ export class BracketvisualizerComponent implements OnInit {
 
   GenerateSeeding() {
     this.seedingBracket = new SeedingBracket(this.surfers);
-    }
+  }
+
+  RerankHeats() {
+    this.seedingBracket.heats.forEach(heat => {
+      switch (heat.heatnumber) {
+        case 1:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          moveItemInArray(heat.heatSurfers, 1, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 2:
+        moveItemInArray(heat.heatSurfers, 0, 2);
+        moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 3:
+        moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 4:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 5:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 6:
+          break;
+          case 7:
+          this.ReorderHeat(heat.heatSurfers);
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          break;
+          case 8:
+          break;
+          case 9:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 10:
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 11:
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+          case 12:
+          break;
+
+        default:
+          break;
+      }
+    });
+  }
 
   onDropSeed(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       const arrayWithData = event.container.data;
-       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
-       for (let index = 0; index < arrayWithData.length; index++) {
-        const rank = index + 1;
-        (arrayWithData[index] as unknown as HeatSurfer).heatRank = rank;
-      }
+      moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
+      this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
+    }
+  }
+
+  ReorderHeat(arrayWithData: HeatSurfer[]) {
+    for (let index = 0; index < arrayWithData.length; index++) {
+      const rank = index + 1;
+      arrayWithData[index].heatRank = rank;
     }
   }
 }
