@@ -61,7 +61,7 @@ export class LosersBracket {
       new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
       new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
       new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
-      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]),];
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
   }
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
@@ -110,16 +110,14 @@ export class RoundOf32 {
       const lastWithSameTier = orderedWinners.map(x => x.surfer.tier).lastIndexOf(tier);
       orderedWinners.splice(lastWithSameTier + 1, 0, loser);
     });
-
-    //const ordered = unorderedSurfers.sort((x, y) => x.rank - y.rank);
-    return orderedWinners.map(x => x.surfer); //.concat(losersWinner)
+    return orderedWinners.map(x => x.surfer);
   }
   orderSurfersFromHeat(seededWinners: HeatSurfer[]) {
     seededWinners.sort((x, y) => {
-      if (x.surfer.tier !== y.surfer.tier){
+      if (x.surfer.tier !== y.surfer.tier) {
         return x.surfer.tier - y.surfer.tier;
       }
-      if (x.heatRank === y.heatRank){
+      if (x.heatRank === y.heatRank) {
         return x.surfer.rank - y.surfer.rank;
       }
       return x.heatRank - y.heatRank;
