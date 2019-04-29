@@ -182,6 +182,7 @@ export class BracketvisualizerComponent implements OnInit {
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateLosersRound();
+      this.GenerateR32();
     }
   }
 
