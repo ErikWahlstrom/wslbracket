@@ -10,6 +10,7 @@
   </div>
   <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
 </div>
+
 <div class="seeding-heat">Seeding Heats:
   <ng-container *ngIf="seedingBracket?.heats">
     <div *ngFor="let heat of seedingBracket.heats">
@@ -46,7 +47,7 @@
   <Button class="mat-button" (click)="RerankLosers()">Rerank heats from results</Button>
 </div>
 
-<div class="round-32">
+<div class="round-32-rankings">
   Ranking after seeding round:
 <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
   <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'">
@@ -54,3 +55,21 @@
   </div>
 </ng-container>
 </div>
+
+<div class="round-32">Round of 32:
+    <ng-container *ngIf="roundOf32?.heats">
+      <div *ngFor="let heat of roundOf32.heats">
+        <div>Heat: {{heat.heatnumber}}</div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)" [cdkDropListData]="heat.heatSurfers">
+          <ng-container *ngFor="let surfer of heat.heatSurfers">
+            <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              <app-surfer [surfer]="surfer.surfer" ></app-surfer>
+              <div>heatRank: {{surfer.heatRank}}</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+    <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
+  </div>

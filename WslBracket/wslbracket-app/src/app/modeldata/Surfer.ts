@@ -78,22 +78,25 @@ export class RoundOf32 {
     const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
     this.orderedSurfers = orderedArray;
     this.heats = [
-      new TwoManHeat(1, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(2, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(3, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(4, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(5, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(6, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(7, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(8, orderedArray[0], orderedArray[7]),
+      new TwoManHeat(1, orderedArray[1], orderedArray[30]),
+      new TwoManHeat(2, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(3, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(4, orderedArray[7], orderedArray[7]),
+
+      new TwoManHeat(5, orderedArray[3], orderedArray[28]),
+      new TwoManHeat(6, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(7, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(8, orderedArray[7], orderedArray[7]),
+
       new TwoManHeat(9, orderedArray[0], orderedArray[31]),
-      new TwoManHeat(10, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(11, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(12, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(13, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(14, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(15, orderedArray[0], orderedArray[7]),
-      new TwoManHeat(16, orderedArray[0], orderedArray[7])];
+      new TwoManHeat(10, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(11, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(12, orderedArray[7], orderedArray[7]),
+
+      new TwoManHeat(13, orderedArray[2], orderedArray[29]),
+      new TwoManHeat(14, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(15, orderedArray[7], orderedArray[7]),
+      new TwoManHeat(16, orderedArray[7], orderedArray[7])];
   }
 
   getSurfersToRoundOf32(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
@@ -112,6 +115,7 @@ export class RoundOf32 {
     });
     return orderedWinners.map(x => x.surfer);
   }
+
   orderSurfersFromHeat(seededWinners: HeatSurfer[]) {
     seededWinners.sort((x, y) => {
       if (x.surfer.tier !== y.surfer.tier) {
