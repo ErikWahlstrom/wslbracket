@@ -8,7 +8,6 @@ import { Surfer } from '../modeldata/Surfer';
 })
 export class SurferComponent implements OnInit {
     @Input() public surfer: Surfer;
-    @ViewChild('ElementRefName') element: ElementRef;
   x: number;
   y: number;
 
