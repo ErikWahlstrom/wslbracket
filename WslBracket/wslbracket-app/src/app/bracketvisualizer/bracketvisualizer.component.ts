@@ -13,7 +13,7 @@ export class BracketvisualizerComponent implements OnInit {
   seedingBracket: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
-  tier3Limit = 28;
+  tier3Limit = 27;
   losersRound: LosersBracket;
   roundOf32: RoundOf32;
 
