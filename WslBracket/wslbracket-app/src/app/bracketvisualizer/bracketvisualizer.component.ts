@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32 } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SurferComponent } from '../surfer/surfer.component';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -16,6 +17,7 @@ export class BracketvisualizerComponent implements OnInit {
   tier3Limit = 27;
   losersRound: LosersBracket;
   roundOf32: RoundOf32;
+  xyList: { x: number; y: number; }[];
 
   constructor() {
     this.surfers = [
@@ -104,6 +106,11 @@ export class BracketvisualizerComponent implements OnInit {
   GenerateSeeding() {
     this.seedingBracket = new SeedingBracket(this.surfers);
   }
+
+  GenerateArrows() {
+    const element = Array.from(document.querySelectorAll('[id^=surferz]'));
+    this.xyList = element.map((e) => ({x: e.getBoundingClientRect().left, y: e.getBoundingClientRect().left }));
+    }
 
   RerankLosers() {
     this.losersRound.heats.forEach(heat => {

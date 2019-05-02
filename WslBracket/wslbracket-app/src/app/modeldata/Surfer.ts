@@ -61,7 +61,7 @@ export class LosersBracket {
       new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
       new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
       new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
-      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]),];
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
   }
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
@@ -79,24 +79,24 @@ export class RoundOf32 {
     this.orderedSurfers = orderedArray;
     this.heats = [
       new TwoManHeat(1, orderedArray[2], orderedArray[29]),
-      //new TwoManHeat(2, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(3, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(4, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(2, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(3, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(4, orderedArray[7], orderedArray[7]),
 
       new TwoManHeat(5, orderedArray[1], orderedArray[30]),
-      //new TwoManHeat(6, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(7, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(8, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(6, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(7, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(8, orderedArray[7], orderedArray[7]),
 
       new TwoManHeat(9, orderedArray[0], orderedArray[31]),
-      //new TwoManHeat(10, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(11, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(12, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(10, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(11, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(12, orderedArray[7], orderedArray[7]),
 
       new TwoManHeat(13, orderedArray[3], orderedArray[28]),
-      //new TwoManHeat(14, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(15, orderedArray[7], orderedArray[7]),
-      //new TwoManHeat(16, orderedArray[7], orderedArray[7])
+      // new TwoManHeat(14, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(15, orderedArray[7], orderedArray[7]),
+      // new TwoManHeat(16, orderedArray[7], orderedArray[7])
     ];
   }
 
