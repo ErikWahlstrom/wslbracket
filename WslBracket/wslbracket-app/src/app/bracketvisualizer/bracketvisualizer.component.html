@@ -9,7 +9,10 @@
     <ng-container *ngFor="let surfer of surfers; let i=index">
       <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <app-surfer [surfer]="surfer" [id]="'surferz'+i"></app-surfer>
+        <app-surfer [surfer]="surfer" [id]="'surferz'+i" name="sirfer"></app-surfer>
+        <svg>
+          <ellipse [attr.cx]="('surferz'+i) +'.x'" [attr.cy]="('surferz'+i) +'.y'" [attr.r]=10 fill="red"></ellipse>
+        </svg>
       </div>
     </ng-container>
   </div>
