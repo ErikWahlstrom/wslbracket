@@ -1,7 +1,7 @@
 <div class=floatTL>
-<svg width=1000 height=1500>
-     <circle *ngFor="let line of xyList" [attr.cx]="line.x" [attr.cy]="line.y" [attr.r]=10 fill="red"></circle>
-</svg>
+  <svg width=1000 height=1500>
+    <circle *ngFor="let line of xyList" [attr.cx]="line.x" [attr.cy]="line.y" [attr.r]=10 fill="red"></circle>
+  </svg>
 </div>
 <div class="header">The bracktes</div>
 <div class="ranking-area">
@@ -9,9 +9,10 @@
     <ng-container *ngFor="let surfer of surfers; let i=index">
       <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <app-surfer [surfer]="surfer" [id]="'surferz'+i" name="sirfer"></app-surfer>
+        <app-surfer #daSurfer [surfer]="surfer"></app-surfer>
+        <b>{{daSurfer.y}}</b>
         <svg>
-          <ellipse [attr.cx]="('surferz'+i) +'.x'" [attr.cy]="('surferz'+i) +'.y'" [attr.r]=10 fill="red"></ellipse>
+          <circle [attr.cx]=5 [attr.cy]=5 [attr.r]="daSurfer.y" fill="green"></circle>
         </svg>
       </div>
     </ng-container>
