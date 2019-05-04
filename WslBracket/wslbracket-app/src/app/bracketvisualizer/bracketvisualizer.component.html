@@ -3,7 +3,17 @@
     <circle *ngFor="let line of xyList" [attr.cx]="line.x" [attr.cy]="line.y" [attr.r]=10 fill="red"></circle>
   </svg>
 </div>
-<div class="header">The bracktes</div>
+<div class="header">The bracktes
+  <mat-form-field>
+    <mat-label>Select an option</mat-label>
+    <mat-select [(value)]="surfers">
+      <mat-option>None</mat-option>
+      <mat-option [value]="goldCoastSurfers">Gold Coast</mat-option>
+      <mat-option [value]="bellsBeachSurfers">Bells beach</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+</div>
 <div class="ranking-area">
   <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
     <ng-container *ngFor="let surfer of surfers; let i=index">

@@ -18,10 +18,12 @@ export class BracketvisualizerComponent implements OnInit {
   losersRound: LosersBracket;
   roundOf32: RoundOf32;
   xyList: { x: number; y: number; }[];
+  goldCoastSurfers: Surfer[];
+  bellsBeachSurfers: Surfer[];
+  selected = 'option2';
 
   constructor() {
-    this.surfers = [
-
+    this.goldCoastSurfers = [
       new Surfer('Gabriel Medina'),
       new Surfer('Julian Wilson'),
       new Surfer('Filipe Toledo'),
@@ -59,6 +61,47 @@ export class BracketvisualizerComponent implements OnInit {
       new Surfer('Reef Heazlewood'),
       new Surfer('Mateus Herdy'),
     ];
+
+    this.bellsBeachSurfers = [
+      new Surfer('Gabriel guld Medina'),
+      new Surfer('Julian Wilson'),
+      new Surfer('Filipe Toledo'),
+      new Surfer('Italo Ferreira'),
+      new Surfer('Jordy Smith'),
+      new Surfer('Owen Wright'),
+      new Surfer('Conner Coffin'),
+      new Surfer('Michel Bourez'),
+      new Surfer('Wade Carmichael'),
+      new Surfer('Kanoa Igarashi'),
+      new Surfer('Kolohe Andino'),
+      new Surfer('Mikey Wright'),
+      new Surfer('John John Florence'),
+      new Surfer('Willian Cardoso'),
+      new Surfer('Sebastian Zietz'),
+      new Surfer('Michael Rodrigues'),
+      new Surfer('Jeremy Flores'),
+      new Surfer('Adrian Buchan'),
+      new Surfer('Griffin Colapinto'),
+      new Surfer('Ezekiel Lau'),
+      new Surfer('Yago Dora'),
+      new Surfer('Joan Duru'),
+      new Surfer('Seth Moniz'),
+      new Surfer('Ryan Callinan'),
+      new Surfer('Peterson Crisanto'),
+      new Surfer('Jesse Mendes'),
+      new Surfer('Deivid Silva'),
+      new Surfer('Ricardo Christie'),
+      new Surfer('Leonardi Fiorivanti'),
+      new Surfer('Jadson Andre'),
+      new Surfer('Soli Bailey'),
+      new Surfer('Jack Freestone'),
+      new Surfer('Kelly Slater'),
+      new Surfer('Caio Ibelli'),
+      new Surfer('Reef Heazlewood'),
+      new Surfer('En annan surfare'),
+    ];
+
+    this.surfers = this.bellsBeachSurfers;
   }
 
   ngOnInit() {
