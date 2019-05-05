@@ -21,6 +21,7 @@
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
         <app-surfer #daSurfer [surfer]="surfer"></app-surfer>
         <b>{{daSurfer.y}}</b>
+
         <svg>
           <circle [attr.cx]=5 [attr.cy]=5 [attr.r]="daSurfer.y" fill="green"></circle>
         </svg>
@@ -97,4 +98,9 @@
     </div>
   </ng-container>
   <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
+</div>
+
+<div>
+  
+  <div *ngFor="let item of allSurferViews">Here</div>
 </div>

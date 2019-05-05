@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32 } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
@@ -9,7 +9,8 @@ import { SurferComponent } from '../surfer/surfer.component';
   styleUrls: ['./bracketvisualizer.component.scss']
 })
 
-export class BracketvisualizerComponent implements OnInit {
+export class BracketvisualizerComponent implements OnInit, AfterViewInit {
+  @ViewChildren(SurferComponent) childrenSurf: QueryList<SurferComponent>;
   surfers: Surfer[];
   seedingBracket: SeedingBracket;
   tier1Limit = 4;
@@ -21,6 +22,7 @@ export class BracketvisualizerComponent implements OnInit {
   goldCoastSurfers: Surfer[];
   bellsBeachSurfers: Surfer[];
   selected = 'option2';
+  allSurferViews: SurferComponent[];
 
   constructor() {
     this.goldCoastSurfers = [
@@ -113,6 +115,13 @@ export class BracketvisualizerComponent implements OnInit {
     this.GenerateR32();
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.allSurferViews = this.childrenSurf.toArray()
+    });
+
+  }
+
   GenerateLosersRound() {
     this.losersRound = new LosersBracket(this.seedingBracket);
   }
@@ -152,21 +161,21 @@ export class BracketvisualizerComponent implements OnInit {
 
   GenerateArrows() {
     const element = Array.from(document.querySelectorAll('[id^=surferz]'));
-    this.xyList = element.map((e) => ({x: e.getBoundingClientRect().left, y: e.getBoundingClientRect().left }));
-    }
+    this.xyList = element.map((e) => ({ x: e.getBoundingClientRect().left, y: e.getBoundingClientRect().left }));
+  }
 
   RerankLosers() {
     this.losersRound.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-        moveItemInArray(heat.heatSurfers, 2, 0);
+          moveItemInArray(heat.heatSurfers, 2, 0);
           this.ReorderHeat(heat.heatSurfers);
           break;
-          case 2:
+        case 2:
           break;
-          case 3:
+        case 3:
           break;
-          case 4:
+        case 4:
           break;
       }
     });
