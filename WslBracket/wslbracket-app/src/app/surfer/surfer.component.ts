@@ -15,7 +15,7 @@ export class SurferComponent implements OnInit {
   }
 
   ngOnInit( ) {
-    this.x = this.elRef.nativeElement.getBoundingClientRect().left;
-    this.y = this.elRef.nativeElement.getBoundingClientRect().top;
+    this.x = Math.max(this.elRef.nativeElement.getBoundingClientRect().left, 0);
+    this.y = Math.max(this.elRef.nativeElement.getBoundingClientRect().top, 0);
   }
 }

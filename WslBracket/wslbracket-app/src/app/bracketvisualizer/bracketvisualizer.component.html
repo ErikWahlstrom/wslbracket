@@ -1,6 +1,10 @@
 <div class=floatTL>
   <svg width=1000 height=1500>
-    <circle *ngFor="let line of xyList" [attr.cx]="line.x" [attr.cy]="line.y" [attr.r]=10 fill="red"></circle>
+    <g>
+      <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" style="fill:none;stroke:black;stroke-width:3">
+        
+      </polyline>
+    </g>
   </svg>
 </div>
 <div class="header">The bracktes
@@ -98,9 +102,4 @@
     </div>
   </ng-container>
   <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
-</div>
-
-<div>
-  
-  <div *ngFor="let item of allSurferViews">Here</div>
 </div>
