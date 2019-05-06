@@ -1,5 +1,6 @@
 <div class=floatTL>
-  <svg width=2000 height=6000>
+  <svg width=2000 height=2000>
+    <circle cx="10" cy="100" r="5" fill="red"></circle>
     <g>
       <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" class="tracking-line">
       </polyline>

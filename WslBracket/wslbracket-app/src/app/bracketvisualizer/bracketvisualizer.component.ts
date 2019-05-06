@@ -127,8 +127,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
               this.allSurferViews.filter(y => y.surfer.name === x.name)
                 .map(viewSurfer => (
                   {
-                    x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left,
-                    y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top
+                    x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
+                    y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
                   }))));
         });
       });
