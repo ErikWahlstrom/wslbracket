@@ -6,6 +6,7 @@
     </g>
   </svg>
 </div>
+
 <div class="mat-h2 header">Select competition
   <mat-form-field>
     <mat-label>Select an option</mat-label>
@@ -18,7 +19,6 @@
 </div>
 
 <div>
-
   <div class="ranking-area mat-body-1">
     Rank the surfers by dragging up and down
     <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
@@ -32,45 +32,46 @@
     <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
   </div>
 
-  <div class="seeding-heat mat-body-1">Seeding Heats:
-    <ng-container *ngIf="seedingBracket?.heats">
-      <mat-grid-list cols="4" rowHeight="300">
-        <mat-grid-tile *ngFor="let heat of seedingBracket.heats">
+  <div class="seeding-heat">
+    <div class="mat-body-1">Seeding Heats:
+      <ng-container *ngIf="seedingBracket?.heats">
+        <mat-grid-list cols="4" rowHeight="100">
+          <mat-grid-tile *ngFor="let heat of seedingBracket.heats">
+            <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
+              [cdkDropListData]="heat.heatSurfers">
+              <ng-container *ngFor="let surfer of heat.heatSurfers">
+                <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+                  <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                  <app-surfer [surfer]="surfer.surfer"></app-surfer>
+                  <div>{{surfer.heatRank}}</div>
+                </div>
+              </ng-container>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </ng-container>
+      <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
+    </div>
+
+    <div class="mat-body-1">Losing Heats:
+      <ng-container *ngIf="losersRound?.heats">
+        <div *ngFor="let heat of losersRound.heats">
+          <div>Heat: {{heat.heatnumber}}</div>
           <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
             [cdkDropListData]="heat.heatSurfers">
             <ng-container *ngFor="let surfer of heat.heatSurfers">
               <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
                 <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                 <app-surfer [surfer]="surfer.surfer"></app-surfer>
-                <div>Heat Rank: {{surfer.heatRank}}</div>
+                <div>{{surfer.heatRank}}</div>
               </div>
             </ng-container>
           </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </ng-container>
-    <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
-  </div>
-
-  <div class="losing-heat mat-body-1">Losing Heats:
-    <ng-container *ngIf="losersRound?.heats">
-      <div *ngFor="let heat of losersRound.heats">
-        <div>Heat: {{heat.heatnumber}}</div>
-        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
-          [cdkDropListData]="heat.heatSurfers">
-          <ng-container *ngFor="let surfer of heat.heatSurfers">
-            <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
-              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              <app-surfer [surfer]="surfer.surfer"></app-surfer>
-              <div>Heat Rank: {{surfer.heatRank}}</div>
-            </div>
-          </ng-container>
         </div>
-      </div>
-    </ng-container>
-    <Button class="mat-button" (click)="RerankLosers()">Rerank heats from results</Button>
+      </ng-container>
+      <Button class="mat-button" (click)="RerankLosers()">Rerank after loser heats</Button>
+    </div>
   </div>
-
 </div>
 <div>
 
@@ -93,7 +94,7 @@
             <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
               <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
               <app-surfer [surfer]="surfer.surfer"></app-surfer>
-              <div>Heat Rank: {{surfer.heatRank}}</div>
+              <div>{{surfer.heatRank}}</div>
             </div>
           </ng-container>
         </div>
