@@ -117,12 +117,20 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.allSurferViews = this.childrenSurf.toArray();
-      this.surfers.forEach(x => {
-        this.lineCoordArr.push(
-          new LineCoordinates(
-            this.allSurferViews.filter(y => y.surfer.name === x.name).map(viewSurfer => ({ x: viewSurfer.x, y: viewSurfer.y }))));
+    this.childrenSurf.changes.subscribe(list => {
+      setTimeout(() => {
+        this.lineCoordArr = [new LineCoordinates([new Coords(1, 1)])];
+        this.allSurferViews = list.toArray();
+        this.surfers.forEach(x => {
+          this.lineCoordArr.push(
+            new LineCoordinates(
+              this.allSurferViews.filter(y => y.surfer.name === x.name)
+                .map(viewSurfer => (
+                  {
+                    x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left,
+                    y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top
+                  }))));
+        });
       });
     });
   }

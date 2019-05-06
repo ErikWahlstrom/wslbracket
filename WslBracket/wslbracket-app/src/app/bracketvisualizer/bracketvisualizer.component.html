@@ -36,7 +36,7 @@
     <div class="mat-body-1">Seeding Heats:
       <ng-container *ngIf="seedingBracket?.heats">
         <mat-grid-list cols="4" rowHeight="100">
-          <mat-grid-tile *ngFor="let heat of seedingBracket.heats">
+          <mat-grid-tile class="z-index-low" *ngFor="let heat of seedingBracket.heats">
             <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
               [cdkDropListData]="heat.heatSurfers">
               <ng-container *ngFor="let surfer of heat.heatSurfers">
