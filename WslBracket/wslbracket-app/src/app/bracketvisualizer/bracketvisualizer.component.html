@@ -1,10 +1,8 @@
 <div class=floatTL>
   <svg width=2000 height=2000>
-    <circle cx="10" cy="100" r="5" fill="red"></circle>
-    <g>
-      <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" [attr.class]="surferview.selected ? 'tracking-line-selected' : 'tracking-line'">
-      </polyline>
-    </g>
+    <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)"
+      [attr.class]="surferview.selected ? 'tracking-line-selected' : 'tracking-line'">
+    </polyline>
   </svg>
 </div>
 
@@ -23,8 +21,9 @@
   Rank the surfers by dragging up and down
   <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
     <ng-container *ngFor="let surfer of surfers; let i=index">
-      <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
-        <div class="example-custom-placeholder" *cdkDragPlaceholder ></div>
+      <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'"
+        [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
         <app-surfer [surfer]="surfer" (click)="selectSurfer(surfer)"></app-surfer>
       </div>
     </ng-container>
@@ -36,17 +35,17 @@
 <div class="seeding-heat mat-body-1">Seeding Heats:
   <ng-container *ngIf="seedingBracket?.heats">
     <div *ngFor="let heat of seedingBracket.heats">
-        <div style="width:10">Heat: {{heat.heatnumber}}</div>
-        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
-          [cdkDropListData]="heat.heatSurfers">
-          <ng-container *ngFor="let surfer of heat.heatSurfers">
-            <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
-              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              <app-surfer [surfer]="surfer.surfer"></app-surfer>
-              <div>{{surfer.heatRank}}</div>
-            </div>
-          </ng-container>
-        </div>
+      <div style="width:10">Heat: {{heat.heatnumber}}</div>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
+        [cdkDropListData]="heat.heatSurfers">
+        <ng-container *ngFor="let surfer of heat.heatSurfers">
+          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <app-surfer [surfer]="surfer.surfer"></app-surfer>
+            <div>{{surfer.heatRank}}</div>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </ng-container>
   <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
