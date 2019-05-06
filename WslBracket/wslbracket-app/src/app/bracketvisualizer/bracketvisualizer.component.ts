@@ -2,7 +2,7 @@ import { Component, OnInit, Directive, ViewChildren, QueryList, AfterViewInit } 
 import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32 } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
-import { lineCoordinates, coords } from './lineCoordinates';
+import { LineCoordinates, Coords } from './lineCoordinates';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -23,7 +23,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   bellsBeachSurfers: Surfer[];
   selected = 'option2';
   allSurferViews!: SurferComponent[];
-  lineCoordArr: lineCoordinates[] = [new lineCoordinates([new coords(1, 1)])];
+  lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)])];
 
   constructor() {
     this.goldCoastSurfers = [
@@ -118,11 +118,13 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.allSurferViews = this.childrenSurf.toArray()
+      this.allSurferViews = this.childrenSurf.toArray();
       this.surfers.forEach(x => {
-        this.lineCoordArr.push(new lineCoordinates(this.allSurferViews.filter(y => y.surfer.name == x.name).map(viewSurfer => { return { x: viewSurfer.x, y: viewSurfer.y } })));
+        this.lineCoordArr.push(
+          new LineCoordinates(
+            this.allSurferViews.filter(y => y.surfer.name === x.name).map(viewSurfer => ({ x: viewSurfer.x, y: viewSurfer.y }))));
       });
-    })
+    });
   }
 
   GenerateLosersRound() {
@@ -250,11 +252,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  GetPoints(linecorr: lineCoordinates){
+  GetPoints(linecorr: LineCoordinates) {
     let retString = '';
-    linecorr.lineCoords.forEach(x=>{
-      retString = retString +' ' + x.x+','+x.y;
-    })
+    linecorr.lineCoords.forEach(x => {
+      retString = retString + ' ' + x.x + ',' + x.y;
+    });
     return retString;
   }
 }
