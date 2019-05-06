@@ -109,6 +109,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.setInitialValues();
+  }
+
+  public setInitialValues() {
     this.SetRankings();
     this.GenerateSeeding();
     this.RerankHeats();

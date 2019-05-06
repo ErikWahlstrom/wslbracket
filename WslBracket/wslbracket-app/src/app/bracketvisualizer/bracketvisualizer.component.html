@@ -9,7 +9,7 @@
 <div class="mat-h2 header">Select competition
   <mat-form-field>
     <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="surfers">
+    <mat-select [(value)]="surfers" (openedChange)="setInitialValues()">
       <mat-option>None</mat-option>
       <mat-option [value]="goldCoastSurfers">Gold Coast</mat-option>
       <mat-option [value]="bellsBeachSurfers">Bells beach</mat-option>
@@ -30,7 +30,6 @@
   </div>
   <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
 </div>
-
 
 <div class="seeding-heat mat-body-1">Seeding Heats:
   <ng-container *ngIf="seedingBracket?.heats">
