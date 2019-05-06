@@ -6,7 +6,7 @@
   fill:none;
   stroke:black;
   stroke-width:1;
-  opacity: 0.3;
+  opacity: 0.1;
 }
 
 .z-index-low{
@@ -34,10 +34,10 @@
 }
 
 .seeding-heat {
-  width: 80%;
+  width: 20%;
   float: left;
   padding: 15px;
-  border: 1px solid red;
+  border: 1px solid lawngreen;
 }
 
 .losing-heat {
@@ -55,7 +55,7 @@
 }
 
 .round-32-rankings {
-  width: 40%;
+  width: 20%;
   float: left;
   padding: 15px;
   border: 1px solid red;
