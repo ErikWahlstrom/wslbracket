@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+.tracking-line{
+  fill:none;
+  stroke:black;
+  stroke-width:1;
+  opacity: 0.3;
+}
+
+
 .floatTL{
   position:absolute;
      top:0px;
