@@ -11,19 +11,19 @@ import { lineCoordinates, coords } from './lineCoordinates';
 })
 
 export class BracketvisualizerComponent implements OnInit, AfterViewInit {
-  @ViewChildren(SurferComponent) childrenSurf: QueryList<SurferComponent>;
+  @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
   surfers: Surfer[];
-  seedingBracket: SeedingBracket;
+  seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
   tier3Limit = 27;
-  losersRound: LosersBracket;
-  roundOf32: RoundOf32;
+  losersRound!: LosersBracket;
+  roundOf32!: RoundOf32;
   goldCoastSurfers: Surfer[];
   bellsBeachSurfers: Surfer[];
   selected = 'option2';
-  allSurferViews: SurferComponent[];
-  lineCoordArr: lineCoordinates[] = [new lineCoordinates([new coords(1,1)])];
+  allSurferViews!: SurferComponent[];
+  lineCoordArr: lineCoordinates[] = [new lineCoordinates([new coords(1, 1)])];
 
   constructor() {
     this.goldCoastSurfers = [

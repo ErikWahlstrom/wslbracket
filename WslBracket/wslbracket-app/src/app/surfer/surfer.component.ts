@@ -7,9 +7,9 @@ import { Surfer } from '../modeldata/Surfer';
   styleUrls: ['./surfer.component.scss']
 })
 export class SurferComponent implements OnInit {
-    @Input() public surfer: Surfer;
-  x: number;
-  y: number;
+    @Input() public surfer!: Surfer;
+  x = 0;
+  y = 0;
 
   constructor(private elRef: ElementRef) {
   }

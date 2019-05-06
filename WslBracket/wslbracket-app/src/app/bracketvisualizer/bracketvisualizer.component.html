@@ -1,8 +1,8 @@
 <div class=floatTL>
-  <svg width=1000 height=6000>
+  <svg width=2000 height=6000>
     <g>
       <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" style="fill:none;stroke:black;stroke-width:3">
-        
+
       </polyline>
     </g>
   </svg>
@@ -33,7 +33,6 @@
     </ng-container>
   </div>
   <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
-  <button class="mat-button" (click)="GenerateArrows()">Generate Arrows</button>
 </div>
 
 

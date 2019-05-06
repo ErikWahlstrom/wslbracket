@@ -1,7 +1,7 @@
 export class Surfer {
   name: string;
-  rank: number;
-  tier: number;
+  rank = 0;
+  tier = 0;
   constructor(name: string) {
     this.name = name;
   }
