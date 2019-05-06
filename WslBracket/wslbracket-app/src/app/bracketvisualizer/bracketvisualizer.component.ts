@@ -67,7 +67,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     ];
 
     this.bellsBeachSurfers = [
-      new Surfer('Gabriel guld Medina'),
+      new Surfer('Gabriel Medina'),
       new Surfer('Julian Wilson'),
       new Surfer('Filipe Toledo'),
       new Surfer('Italo Ferreira'),
@@ -109,15 +109,24 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.setInitialValues();
+      this.setInitialValuesGc();
   }
 
-  public setInitialValues() {
+  public setInitialValuesGc() {
     this.SetRankings();
     this.GenerateSeeding();
-    this.RerankHeats();
+    this.RerankHeatsGc();
     this.GenerateLosersRound();
-    this.RerankLosers();
+    this.RerankLosersGc();
+    this.GenerateR32();
+  }
+
+  public setInitialValuesBb() {
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.RerankHeatsBb();
+    this.GenerateLosersRound();
+    this.RerankLosersBb();
     this.GenerateR32();
   }
 
@@ -183,7 +192,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.seedingBracket = new SeedingBracket(this.surfers);
   }
 
-  RerankLosers() {
+  RerankLosersGc() {
     this.losersRound.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
@@ -200,7 +209,78 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  RerankHeats() {
+  RerankLosersBb() {
+    this.losersRound.heats.forEach(heat => {
+      switch (heat.heatnumber) {
+        case 1:
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+      }
+    });
+  }
+
+  RerankHeatsGc() {
+    this.seedingBracket.heats.forEach(heat => {
+      switch (heat.heatnumber) {
+        case 1:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          moveItemInArray(heat.heatSurfers, 1, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 2:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 3:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 4:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 5:
+          moveItemInArray(heat.heatSurfers, 0, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 6:
+          break;
+        case 7:
+          this.ReorderHeat(heat.heatSurfers);
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          break;
+        case 8:
+          break;
+        case 9:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 10:
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 11:
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
+          break;
+        case 12:
+          break;
+
+        default:
+          break;
+      }
+    });
+  }
+
+  RerankHeatsBb() {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
