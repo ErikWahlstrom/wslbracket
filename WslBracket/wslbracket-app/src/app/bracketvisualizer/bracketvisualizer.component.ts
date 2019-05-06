@@ -23,7 +23,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   bellsBeachSurfers: Surfer[];
   selected = 'option2';
   allSurferViews!: SurferComponent[];
-  lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)])];
+  lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
+  selectedSurfer?: Surfer = undefined;
 
   constructor() {
     this.goldCoastSurfers = [
@@ -118,20 +119,25 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.childrenSurf.changes.subscribe(list => {
-      setTimeout(() => {
-        this.lineCoordArr = [new LineCoordinates([new Coords(1, 1)])];
-        this.allSurferViews = list.toArray();
-        this.surfers.forEach(x => {
-          this.lineCoordArr.push(
-            new LineCoordinates(
-              this.allSurferViews.filter(y => y.surfer.name === x.name)
-                .map(viewSurfer => (
-                  {
-                    x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
-                    y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
-                  }))));
-        });
-      });
+      setTimeout(() => this.setSurferLines(list.toArray()));
+    });
+  }
+
+  setSurferLines(list: SurferComponent[]) {
+    if (list === undefined) {
+      return;
+    }
+    this.lineCoordArr = [new LineCoordinates([new Coords(1, 1)], false)];
+    this.allSurferViews = list;
+    this.surfers.forEach(x => {
+      this.lineCoordArr.push(
+        new LineCoordinates(
+          this.allSurferViews.filter(y => y.surfer.name === x.name)
+            .map(viewSurfer => (
+              {
+                x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
+                y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
+              })), this.selectedSurfer === x));
     });
   }
 
@@ -146,6 +152,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
+      this.selectedSurfer = this.surfers[event.currentIndex];
       this.SetRankings();
     }
     this.GenerateSeeding();
@@ -266,6 +273,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       retString = retString + ' ' + x.x + ',' + x.y;
     });
     return retString;
+  }
+
+  public selectSurfer(surfer: Surfer) {
+    this.selectedSurfer = surfer;
+    this.setSurferLines(this.allSurferViews);
   }
 }
 

@@ -2,7 +2,7 @@
   <svg width=2000 height=2000>
     <circle cx="10" cy="100" r="5" fill="red"></circle>
     <g>
-      <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" class="tracking-line">
+      <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)" [attr.class]="surferview.selected ? 'tracking-line-selected' : 'tracking-line'">
       </polyline>
     </g>
   </svg>
@@ -23,9 +23,9 @@
   Rank the surfers by dragging up and down
   <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
     <ng-container *ngFor="let surfer of surfers; let i=index">
-      <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <app-surfer [surfer]="surfer"></app-surfer>
+      <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder ></div>
+        <app-surfer [surfer]="surfer" (click)="selectSurfer(surfer)"></app-surfer>
       </div>
     </ng-container>
   </div>

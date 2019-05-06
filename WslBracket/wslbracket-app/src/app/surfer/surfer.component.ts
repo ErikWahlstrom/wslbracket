@@ -8,7 +8,7 @@ import { Surfer } from '../modeldata/Surfer';
 })
 export class SurferComponent {
     @Input() public surfer!: Surfer;
-
+    selected = false;
   constructor(public elRef: ElementRef) {
   }
 }

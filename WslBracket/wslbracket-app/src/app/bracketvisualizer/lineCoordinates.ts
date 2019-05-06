@@ -1,8 +1,9 @@
 export class LineCoordinates {
   lineCoords: Coords[];
-
-  constructor(coords: Coords[]) {
+  selected = false;
+  constructor(coords: Coords[], selected: boolean) {
     this.lineCoords = coords;
+    this.selected = selected;
   }
 }
 
