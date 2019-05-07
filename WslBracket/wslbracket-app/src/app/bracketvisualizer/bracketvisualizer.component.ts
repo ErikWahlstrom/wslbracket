@@ -11,7 +11,7 @@ import { LineCoordinates, Coords } from './lineCoordinates';
 })
 
 export class BracketvisualizerComponent implements OnInit, AfterViewInit {
-    @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
+  @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
   surfers: Surfer[];
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
@@ -150,7 +150,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-      this.setInitialValues();
+    this.setInitialValues();
   }
 
   public setInitialValues() {
@@ -348,41 +348,49 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-          //moveItemInArray(heat.heatSurfers, 0, 2);
-          //moveItemInArray(heat.heatSurfers, 1, 1);
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 2:
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 3:
+          moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 4:
+          moveItemInArray(heat.heatSurfers, 0, 1);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 5:
+          moveItemInArray(heat.heatSurfers, 2, 0);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 6:
           break;
         case 7:
           moveItemInArray(heat.heatSurfers, 0, 1);
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
           break;
         case 8:
           break;
         case 9:
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 10:
+          moveItemInArray(heat.heatSurfers, 2, 0);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 11:
-          this.ReorderHeat(heat.heatSurfers);
           break;
         case 12:
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          this.ReorderHeat(heat.heatSurfers);
           break;
-
         default:
           break;
       }
