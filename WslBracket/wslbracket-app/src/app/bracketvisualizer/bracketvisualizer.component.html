@@ -38,7 +38,7 @@
       <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
         [cdkDropListData]="heat.heatSurfers">
         <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag (click)="selectSurfer(surfer.surfer)">
+          <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag (click)="selectSurfer(surfer.surfer)">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <app-surfer [surfer]="surfer.surfer"></app-surfer>
             <div>{{surfer.heatRank}}</div>
@@ -56,7 +56,7 @@
       <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
         [cdkDropListData]="heat.heatSurfers">
         <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+            <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag (click)="selectSurfer(surfer.surfer)">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <app-surfer [surfer]="surfer.surfer"></app-surfer>
             <div>{{surfer.heatRank}}</div>
@@ -70,7 +70,7 @@
 <div class="round-32-rankings mat-body-1">
   Ranking after seeding round:
   <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
-    <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'">
+    <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" (click)="selectSurfer(surfer)">
       <app-surfer [surfer]="surfer"></app-surfer>
     </div>
   </ng-container>
@@ -83,7 +83,7 @@
       <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
         [cdkDropListData]="heat.heatSurfers">
         <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+          <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag (click)="selectSurfer(surfer.surfer)">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <app-surfer [surfer]="surfer.surfer"></app-surfer>
             <div>{{surfer.heatRank}}</div>
