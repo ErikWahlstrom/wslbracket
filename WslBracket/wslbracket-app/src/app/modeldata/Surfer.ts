@@ -5,6 +5,7 @@ export class Surfer {
   actualRank?: number;
   actualTier?: number;
   roundOneWinner: boolean;
+  thirdRoundSurfer: boolean;
   constructor(name: string, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;
@@ -96,12 +97,18 @@ export class RoundOf32 {
       element.heatSurfers[0].surfer.roundOneWinner = true;
       element.heatSurfers[1].surfer.roundOneWinner = false;
       element.heatSurfers[2].surfer.roundOneWinner = false;
+      element.heatSurfers[0].surfer.thirdRoundSurfer = false;
+      element.heatSurfers[1].surfer.thirdRoundSurfer = false;
+      element.heatSurfers[2].surfer.thirdRoundSurfer = false;
     });
 
     surfersFromLosers.heats.forEach(element => {
       element.heatSurfers[0].surfer.roundOneWinner = false;
       element.heatSurfers[1].surfer.roundOneWinner = false;
       element.heatSurfers[2].surfer.roundOneWinner = false;
+      element.heatSurfers[0].surfer.thirdRoundSurfer = true;
+      element.heatSurfers[1].surfer.thirdRoundSurfer = true;
+      element.heatSurfers[2].surfer.thirdRoundSurfer = true;
     });
 
     const qualifiedSurfers = surfersFromLosers.heats.concat(seededSurfers.heats).map(x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
@@ -123,6 +130,14 @@ export class RoundOf32 {
       if (y.roundOneWinner)
       {
         return 1;
+      }
+
+      if (x.GetActualTier() > 3 && x.thirdRoundSurfer && !y.thirdRoundSurfer && y.GetActualRank() - x.GetActualRank() === 1){
+        return 1;
+      }
+
+      if (x.GetActualTier() > 3 && y.thirdRoundSurfer && !x.thirdRoundSurfer && x.GetActualRank() - y.GetActualRank() === 1){
+        return -1;
       }
 
       return x.GetActualRank() - y.GetActualRank();
