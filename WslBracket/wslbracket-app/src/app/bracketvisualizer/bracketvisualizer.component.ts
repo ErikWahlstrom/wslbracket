@@ -42,13 +42,13 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Kanoa Igarashi'),
       new Surfer('Mikey Wright'),
       new Surfer('Willian Cardoso'),
-      new Surfer('Reef Heazlewood', 34),
+      new Surfer('Reef Heazlewood', 35),
       new Surfer('Yago Dora'),
       new Surfer('Seth Moniz'),
       new Surfer('Michael Rodrigues'),
       new Surfer('Jeremy Flores'),
       new Surfer('Adrian Buchan'),
-      new Surfer('Xavier Huxtable', 35),
+      new Surfer('Xavier Huxtable', 36),
       new Surfer('Ezekiel Lau'),
       new Surfer('Joan Duru'),
       new Surfer('Ryan Callinan'),
@@ -237,7 +237,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   SetRankings() {
     for (let index = 0; index < this.surfers.length; index++) {
-      const rank = index + 1;
+      const replacementSurfers = this.surfers.filter(x => x.actualRank !== undefined && x.actualRank < (index + 1)).length;
+      const rank = index + 1 + replacementSurfers;
       const surfer = this.surfers[index];
       surfer.rank = rank;
       if (rank <= this.tier1Limit) {
