@@ -112,6 +112,15 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesGc();
   }
 
+  public setInitialValues() {
+    if (this.surfers === this.goldCoastSurfers) {
+      this.setInitialValuesGc();
+    }
+    if (this.surfers === this.bellsBeachSurfers) {
+      this.setInitialValuesBb();
+    }
+  }
+
   public setInitialValuesGc() {
     this.SetRankings();
     this.GenerateSeeding();

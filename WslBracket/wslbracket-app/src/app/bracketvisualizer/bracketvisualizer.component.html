@@ -12,9 +12,10 @@
     <mat-select [(value)]="surfers" (openedChange)="setInitialValues()">
       <mat-option>None</mat-option>
       <mat-option [value]="goldCoastSurfers">Gold Coast</mat-option>
-      <mat-option [value]="bellsBeachSurfers">Bells beach</mat-option>
+      <mat-option [value]="bellsBeachSurfers">Bells Beach</mat-option>
     </mat-select>
   </mat-form-field>
+  <button class="mat-button" (click)="setInitialValues()">Reset bracket to actual result for event</button>
 </div>
 
 <div class="ranking-area mat-body-1">
@@ -28,7 +29,6 @@
       </div>
     </ng-container>
   </div>
-  <button class="mat-button" (click)="GenerateSeeding()">Generate Seeding</button>
 </div>
 
 <div class="seeding-heat mat-body-1">Seeding Heats:
@@ -38,7 +38,7 @@
       <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
         [cdkDropListData]="heat.heatSurfers">
         <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag>
+          <div class="example-box" [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag (click)="selectSurfer(surfer.surfer)">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <app-surfer [surfer]="surfer.surfer"></app-surfer>
             <div>{{surfer.heatRank}}</div>
@@ -47,7 +47,6 @@
       </div>
     </div>
   </ng-container>
-  <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
 </div>
 
 <div class="losing-heat mat-body-1">Losing Heats:
@@ -66,7 +65,6 @@
       </div>
     </div>
   </ng-container>
-  <Button class="mat-button" (click)="RerankLosers()">Rerank after loser heats</Button>
 </div>
 
 <div class="round-32-rankings mat-body-1">
@@ -94,5 +92,4 @@
       </div>
     </div>
   </ng-container>
-  <Button class="mat-button" (click)="RerankHeats()">Rerank heats from results</Button>
 </div>
