@@ -4,6 +4,7 @@ export class Surfer {
   tier = 0;
   actualRank?: number;
   actualTier?: number;
+  roundOneWinner: boolean;
   constructor(name: string, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;
@@ -91,25 +92,64 @@ export class RoundOf32 {
   heats: TwoManHeat[];
   orderedSurfers: Surfer[];
   constructor(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
-    const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
-    this.orderedSurfers = orderedArray;
+    seededSurfers.heats.forEach(element => {
+      element.heatSurfers[0].surfer.roundOneWinner = true;
+      element.heatSurfers[1].surfer.roundOneWinner = false;
+      element.heatSurfers[2].surfer.roundOneWinner = false;
+    });
+
+    surfersFromLosers.heats.forEach(element => {
+      element.heatSurfers[0].surfer.roundOneWinner = false;
+      element.heatSurfers[1].surfer.roundOneWinner = false;
+      element.heatSurfers[2].surfer.roundOneWinner = false;
+    });
+
+    const qualifiedSurfers = surfersFromLosers.heats.concat(seededSurfers.heats).map(x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
+    
+    qualifiedSurfers.sort((x,y)=>{
+      if (x.GetActualTier() !== y.GetActualTier()) {
+        return x.GetActualTier() - y.GetActualTier();
+      }
+
+      if (x.roundOneWinner && y.roundOneWinner) {
+        return x.GetActualRank() - y.GetActualRank()
+      }
+
+      if (x.roundOneWinner)
+      {
+        return -1;
+      }
+
+      if (y.roundOneWinner)
+      {
+        return 1;
+      }
+
+      return x.GetActualRank() - y.GetActualRank();
+
+    })
+
+
+    //const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
+    
+    this.orderedSurfers = qualifiedSurfers;
     this.heats = [
-      new TwoManHeat(1, orderedArray[2], orderedArray[29]),
+      new TwoManHeat(1, qualifiedSurfers[2], qualifiedSurfers[29]),
       // new TwoManHeat(2, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(3, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(4, orderedArray[7], orderedArray[7]),
 
-      new TwoManHeat(5, orderedArray[1], orderedArray[30]),
+      new TwoManHeat(5, qualifiedSurfers[1], qualifiedSurfers[30]),
       // new TwoManHeat(6, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(7, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(8, orderedArray[7], orderedArray[7]),
 
-      new TwoManHeat(9, orderedArray[0], orderedArray[31]),
+      new TwoManHeat(9, qualifiedSurfers[0], qualifiedSurfers[31]),
       // new TwoManHeat(10, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(11, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(12, orderedArray[7], orderedArray[7]),
 
-      new TwoManHeat(13, orderedArray[3], orderedArray[28]),
+      new TwoManHeat(13, qualifiedSurfers[3], qualifiedSurfers[28]),
       // new TwoManHeat(14, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(15, orderedArray[7], orderedArray[7]),
       // new TwoManHeat(16, orderedArray[7], orderedArray[7])
