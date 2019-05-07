@@ -136,3 +136,10 @@ export class RoundOf32 {
   }
 }
 
+export enum surfEvents {
+  GoldCoast,
+  BellsBeach,
+  NextEvent,
+  None,
+}
+

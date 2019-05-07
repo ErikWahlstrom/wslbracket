@@ -9,10 +9,10 @@
 <div class="mat-h2 header">Select competition
   <mat-form-field>
     <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="surfers" (openedChange)="setInitialValues()">
-      <mat-option>None</mat-option>
-      <mat-option [value]="goldCoastSurfers">Gold Coast</mat-option>
-      <mat-option [value]="bellsBeachSurfers">Bells Beach</mat-option>
+    <mat-select [(value)]="selectedEvent" (openedChange)="setInitialValues()">
+      <mat-option [value]="goldCoastEnumVal">Gold Coast</mat-option>
+      <mat-option [value]="bellsEnumVal">Bells Beach</mat-option>
+      <mat-option [value]="nextEventEnumVal">Next</mat-option>
     </mat-select>
   </mat-form-field>
   <button class="mat-button" (click)="setInitialValues()">Reset bracket to actual result for event</button>
