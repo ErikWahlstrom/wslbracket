@@ -140,7 +140,7 @@ export class RoundOf32 {
         return x.surfer.GetActualTier() - y.surfer.GetActualTier();
       }
 
-      if (x.heatRank === 1 || y.heatRank === 1 && x.heatRank !== y.heatRank) {
+      if ((x.heatRank === 1 || y.heatRank === 1) && x.heatRank !== y.heatRank) {
         return x.heatRank - y.heatRank;
       }
       return x.surfer.GetActualRank() - y.surfer.GetActualRank();
