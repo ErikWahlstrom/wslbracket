@@ -7,6 +7,7 @@ export class Surfer {
   roundOneWinner: boolean;
   thirdRoundSurfer: boolean;
   points = 0;
+  tierHighScore: any;
   constructor(name: string, points?: number, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;
@@ -98,6 +99,12 @@ export class RoundOf32 {
   heats: TwoManHeat[];
   orderedSurfers: Surfer[];
   constructor(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
+    let tier1HighScore = 0;
+    let tier2HighScore = 0;
+    let tier3HighScore = 0;
+    let tier4HighScore = 0;
+    
+    
     seededSurfers.heats.forEach(element => {
       element.heatSurfers[0].surfer.roundOneWinner = true;
       element.heatSurfers[1].surfer.roundOneWinner = false;
@@ -105,6 +112,26 @@ export class RoundOf32 {
       element.heatSurfers[0].surfer.thirdRoundSurfer = false;
       element.heatSurfers[1].surfer.thirdRoundSurfer = false;
       element.heatSurfers[2].surfer.thirdRoundSurfer = false;
+      element.heatSurfers.forEach(x => {
+        if (!x.surfer.roundOneWinner){
+          switch (x.surfer.GetActualTier()) {
+            case 1:
+            tier1HighScore = Math.max(tier1HighScore, x.surfer.points);
+            break;
+            case 2:
+            tier2HighScore = Math.max(tier2HighScore, x.surfer.points);
+            break;
+            case 3:
+            tier3HighScore = Math.max(tier3HighScore, x.surfer.points);
+            break;
+            case 4:
+            tier4HighScore = Math.max(tier4HighScore, x.surfer.points);
+            break;  
+          }
+        }
+        
+
+      })
     });
 
     surfersFromLosers.heats.forEach(element => {
@@ -137,8 +164,28 @@ export class RoundOf32 {
         return 1;
       }
 
-      if (x.points !== y.points){
-        return y.points - x.points;
+      let tierHighScore = 0
+      switch ( x.GetActualTier() ){
+        case 1:
+        tierHighScore = tier1HighScore;
+        break;
+        case 2:
+        tierHighScore = tier2HighScore;
+        break;
+        case 3:
+        tierHighScore = tier3HighScore;
+        break;
+        case 4:
+        tierHighScore = tier4HighScore;
+        break;
+      } 
+
+      if (x.points === tierHighScore){
+        return -1;
+      }
+
+      if (y.points === tierHighScore ){
+        return 1;
       }
       
       return x.GetActualRank() - y.GetActualRank();
