@@ -127,13 +127,8 @@ export class RoundOf32 {
 
     orderedLosers.forEach(loser => {
       const tier = loser.surfer.GetActualTier();
-      const lastWithSameTier = orderedWinners.filter(x => x.surfer.GetActualTier() === tier).sort((x, y) => {
-        if (x.heatRank === 1 || y.heatRank === 1 && x.heatRank !== y.heatRank) {
-          return x.heatRank - y.heatRank;
-        }
-        return x.surfer.GetActualRank() - y.surfer.GetActualRank();
-      })[0];
-      const indexOfLast = orderedWinners.indexOf(lastWithSameTier);
+      const winnersWithSameTier = orderedWinners.filter(x => x.surfer.GetActualTier() === tier);
+      const indexOfLast = orderedWinners.indexOf(winnersWithSameTier[winnersWithSameTier.length - 1]);
       orderedWinners.splice(indexOfLast + 1, 0, loser);
     });
     return orderedWinners.map(x => x.surfer);
