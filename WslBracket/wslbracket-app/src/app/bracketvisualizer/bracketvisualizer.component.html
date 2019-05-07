@@ -22,9 +22,9 @@
   <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
     <ng-container *ngFor="let surfer of surfers; let i=index">
       <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'"
-        [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag>
+        [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" cdkDrag (click)="selectSurfer(surfer)">
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <app-surfer [surfer]="surfer" (click)="selectSurfer(surfer)"></app-surfer>
+        <app-surfer [surfer]="surfer"></app-surfer>
       </div>
     </ng-container>
   </div>
