@@ -13,7 +13,7 @@ export class Surfer {
   }
 
   public GetActualTier(): number {
-      return this.actualTier !== undefined ? this.actualTier : this.tier;
+    return this.actualTier !== undefined ? this.actualTier : this.tier;
   }
 
   public GetActualRank(): number {
@@ -75,7 +75,7 @@ export class LosersBracket {
       new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
       new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
       new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
-      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]),];
   }
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
@@ -128,7 +128,13 @@ export class RoundOf32 {
     orderedLosers.forEach(loser => {
       const tier = loser.surfer.GetActualTier();
       const winnersWithSameTier = orderedWinners.filter(x => x.surfer.GetActualTier() === tier);
-      const indexOfLast = orderedWinners.indexOf(winnersWithSameTier[winnersWithSameTier.length - 1]);
+      const betterRanked = winnersWithSameTier.filter(x => x.surfer.GetActualRank() < loser.surfer.GetActualRank())
+      let indexOfLast = 0;
+      if (betterRanked.length > 0) {
+        indexOfLast = orderedWinners.indexOf(betterRanked[betterRanked.length - 1]);
+      } else {
+        indexOfLast = orderedWinners.indexOf(winnersWithSameTier[winnersWithSameTier.length - 1]);
+      }
       orderedWinners.splice(indexOfLast + 1, 0, loser);
     });
     return orderedWinners.map(x => x.surfer);
