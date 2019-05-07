@@ -131,15 +131,7 @@ export class RoundOf32 {
       {
         return 1;
       }
-
-      if (x.GetActualTier() > 3 && x.thirdRoundSurfer && !y.thirdRoundSurfer && y.GetActualRank() - x.GetActualRank() === 1){
-        return 1;
-      }
-
-      if (x.GetActualTier() > 3 && y.thirdRoundSurfer && !x.thirdRoundSurfer && x.GetActualRank() - y.GetActualRank() === 1){
-        return -1;
-      }
-
+      
       return x.GetActualRank() - y.GetActualRank();
 
     })
