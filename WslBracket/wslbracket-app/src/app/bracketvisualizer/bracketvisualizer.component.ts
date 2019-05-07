@@ -143,6 +143,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.childrenSurf.changes.subscribe(list => {
       setTimeout(() => this.setSurferLines(list.toArray()));
     });
+    setTimeout(() => this.setSurferLines(this.childrenSurf.toArray()));
   }
 
   setSurferLines(list: SurferComponent[]) {
