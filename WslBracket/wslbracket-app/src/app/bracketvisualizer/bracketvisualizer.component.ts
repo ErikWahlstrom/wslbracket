@@ -29,75 +29,40 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   getBellsBeachSurfers(): Surfer[] {
     return [
       new Surfer('Gabriel bells Medina'),
-
       new Surfer('Julian Wilson'),
-
       new Surfer('Italo Ferreira'),
-
       new Surfer('Filipe Toledo'),
-
       new Surfer('Jordy Smith'),
-
       new Surfer('Owen Wright'),
-
       new Surfer('Michael Rodrigues'),
-
       new Surfer('Kolohe Andino'),
-
       new Surfer('Wade Carmichael'),
-
       new Surfer('Michel Bourez'),
-
       new Surfer('John John Florence'),
-
       new Surfer('Kanoa Igarashi'),
-
       new Surfer('Mikey Wright'),
-
       new Surfer('Willian Cardoso'),
-
       new Surfer('Reef Heazlewood'),
-
       new Surfer('Yago Dora'),
-
       new Surfer('Seth Moniz'),
-
       new Surfer('Conner Coffin'),
-
       new Surfer('Jeremy Flores'),
-
       new Surfer('Adrian Buchan'),
-
       new Surfer('Xavier Huxtable'),
-
       new Surfer('Ezekiel Lau'),
-
       new Surfer('Joan Duru'),
-
       new Surfer('Ryan Callinan'),
-
       new Surfer('Peterson Crisanto'),
-
       new Surfer('Jesse Mendes'),
-
       new Surfer('Deivid Silva'),
-
       new Surfer('Ricardo Christie'),
-
       new Surfer('Soli Bailey'),
-
       new Surfer('Leonardi Fiorivanti'),
-
       new Surfer('Jadson Andre'),
-
       new Surfer('Jack Freestone'),
-
       new Surfer('Kelly Slater'),
-
       new Surfer('Caio Ibelli'),
-
       new Surfer('Jacob Willcox'),
-
       new Surfer('Harrison Mann'),
     ];
   }
