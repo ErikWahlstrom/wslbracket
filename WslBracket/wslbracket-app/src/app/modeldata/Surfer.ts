@@ -2,8 +2,10 @@ export class Surfer {
   name: string;
   rank = 0;
   tier = 0;
-  constructor(name: string) {
+  actualRank?: number;
+  constructor(name: string, actualRank?: number) {
     this.name = name;
+    this.actualRank = actualRank;
   }
 }
 
@@ -66,7 +68,11 @@ export class LosersBracket {
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
     const unorderedSurfers = surfers.heats.map(x => x.heatSurfers[2].surfer);
-    const ordered = unorderedSurfers.sort((x, y) => x.rank - y.rank);
+    const ordered = unorderedSurfers.sort((x, y) => {
+      const rankX = (x.actualRank !== undefined) ? x.actualRank : x.rank;
+      const rankY = (y.actualRank !== undefined) ? y.actualRank : y.rank;
+      return rankX - rankY;
+    });
     return ordered;
   }
 }

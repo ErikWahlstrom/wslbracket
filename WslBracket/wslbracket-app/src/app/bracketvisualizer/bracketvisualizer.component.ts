@@ -34,7 +34,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Filipe Toledo'),
       new Surfer('Jordy Smith'),
       new Surfer('Owen Wright'),
-      new Surfer('Michael Rodrigues'),
+      new Surfer('Conner Coffin'),
       new Surfer('Kolohe Andino'),
       new Surfer('Wade Carmichael'),
       new Surfer('Michel Bourez'),
@@ -42,13 +42,13 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Kanoa Igarashi'),
       new Surfer('Mikey Wright'),
       new Surfer('Willian Cardoso'),
-      new Surfer('Reef Heazlewood'),
+      new Surfer('Reef Heazlewood', 34),
       new Surfer('Yago Dora'),
       new Surfer('Seth Moniz'),
-      new Surfer('Conner Coffin'),
+      new Surfer('Michael Rodrigues'),
       new Surfer('Jeremy Flores'),
       new Surfer('Adrian Buchan'),
-      new Surfer('Xavier Huxtable'),
+      new Surfer('Xavier Huxtable', 35),
       new Surfer('Ezekiel Lau'),
       new Surfer('Joan Duru'),
       new Surfer('Ryan Callinan'),
@@ -277,14 +277,18 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.losersRound.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-          //moveItemInArray(heat.heatSurfers, 2, 0);
-          //this.ReorderHeat(heat.heatSurfers);
           break;
         case 2:
+          moveItemInArray(heat.heatSurfers, 0, 1);
+          this.ReorderHeat(heat.heatSurfers);
           break;
         case 3:
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          this.ReorderHeat(heat.heatSurfers);
           break;
         case 4:
+          moveItemInArray(heat.heatSurfers, 1, 2);
+          this.ReorderHeat(heat.heatSurfers);
           break;
       }
     });
@@ -370,7 +374,6 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         case 6:
           break;
         case 7:
-          moveItemInArray(heat.heatSurfers, 0, 1);
           moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
