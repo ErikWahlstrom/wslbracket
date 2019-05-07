@@ -173,7 +173,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.GenerateSeeding();
     this.RerankHeatsGc();
     this.GenerateLosersRound();
-    //this.RerankLosersGc();
+    this.RerankLosersGc();
     this.GenerateR32();
   }
 
