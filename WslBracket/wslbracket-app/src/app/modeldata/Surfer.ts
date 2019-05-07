@@ -6,12 +6,17 @@ export class Surfer {
   actualTier?: number;
   roundOneWinner: boolean;
   thirdRoundSurfer: boolean;
-  constructor(name: string, actualRank?: number) {
+  points = 0;
+  constructor(name: string, points?: number, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;
     if (actualRank !== undefined) {
       this.actualTier = 4;
     }
+    if (points !== undefined){
+      this.points = points;
+    }
+
   }
 
   public GetActualTier(): number {
