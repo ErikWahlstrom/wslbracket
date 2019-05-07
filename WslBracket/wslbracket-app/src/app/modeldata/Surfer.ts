@@ -4,10 +4,11 @@ export class Surfer {
   tier = 0;
   actualRank?: number;
   actualTier?: number;
-  roundOneWinner: boolean;
-  thirdRoundSurfer: boolean;
+  
   points = 0;
   tierHighScore: any;
+  roundOneResult: number;
+  roundTwoResult: number;
   constructor(name: string, points?: number, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;
@@ -99,48 +100,21 @@ export class RoundOf32 {
   heats: TwoManHeat[];
   orderedSurfers: Surfer[];
   constructor(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
-    let tier1HighScore = 0;
-    let tier2HighScore = 0;
-    let tier3HighScore = 0;
-    let tier4HighScore = 0;
+    
     
     
     seededSurfers.heats.forEach(element => {
-      element.heatSurfers[0].surfer.roundOneWinner = true;
-      element.heatSurfers[1].surfer.roundOneWinner = false;
-      element.heatSurfers[2].surfer.roundOneWinner = false;
-      element.heatSurfers[0].surfer.thirdRoundSurfer = false;
-      element.heatSurfers[1].surfer.thirdRoundSurfer = false;
-      element.heatSurfers[2].surfer.thirdRoundSurfer = false;
-      element.heatSurfers.forEach(x => {
-        if (!x.surfer.roundOneWinner){
-          switch (x.surfer.GetActualTier()) {
-            case 1:
-            tier1HighScore = Math.max(tier1HighScore, x.surfer.points);
-            break;
-            case 2:
-            tier2HighScore = Math.max(tier2HighScore, x.surfer.points);
-            break;
-            case 3:
-            tier3HighScore = Math.max(tier3HighScore, x.surfer.points);
-            break;
-            case 4:
-            tier4HighScore = Math.max(tier4HighScore, x.surfer.points);
-            break;  
-          }
-        }
-        
-
-      })
-    });
+      element.heatSurfers[0].surfer.roundOneResult = 1;
+      element.heatSurfers[1].surfer.roundOneResult = 2;
+      element.heatSurfers[2].surfer.roundOneResult = 3;
+      });
+    
 
     surfersFromLosers.heats.forEach(element => {
-      element.heatSurfers[0].surfer.roundOneWinner = false;
-      element.heatSurfers[1].surfer.roundOneWinner = false;
-      element.heatSurfers[2].surfer.roundOneWinner = false;
-      element.heatSurfers[0].surfer.thirdRoundSurfer = true;
-      element.heatSurfers[1].surfer.thirdRoundSurfer = true;
-      element.heatSurfers[2].surfer.thirdRoundSurfer = true;
+      element.heatSurfers[0].surfer.roundTwoResult = 1;
+      element.heatSurfers[1].surfer.roundTwoResult = 2;
+      element.heatSurfers[2].surfer.roundTwoResult = 3;
+      
     });
 
     const qualifiedSurfers = surfersFromLosers.heats.concat(seededSurfers.heats).map(x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
@@ -150,45 +124,27 @@ export class RoundOf32 {
         return x.GetActualTier() - y.GetActualTier();
       }
 
-      if (x.roundOneWinner && y.roundOneWinner) {
+      if (x.roundOneResult === 1 && y.roundOneResult === 1) {
         return x.GetActualRank() - y.GetActualRank()
       }
 
-      if (x.roundOneWinner)
-      {
-        return -1;
+      if (x.roundOneResult === 2 && y.roundOneResult === 2) {
+        return x.GetActualRank() - y.GetActualRank()
       }
 
-      if (y.roundOneWinner)
-      {
-        return 1;
+      if (x.roundOneResult < 3){
+        return x.roundOneResult - y.roundOneResult;
       }
 
-      let tierHighScore = 0
-      switch ( x.GetActualTier() ){
-        case 1:
-        tierHighScore = tier1HighScore;
-        break;
-        case 2:
-        tierHighScore = tier2HighScore;
-        break;
-        case 3:
-        tierHighScore = tier3HighScore;
-        break;
-        case 4:
-        tierHighScore = tier4HighScore;
-        break;
-      } 
-
-      if (x.points === tierHighScore){
-        return -1;
+      if (y.roundOneResult < 3){
+        return x.roundOneResult - y.roundOneResult;
       }
 
-      if (y.points === tierHighScore ){
-        return 1;
+      if (x.roundTwoResult === y.roundTwoResult) {
+        return x.GetActualRank() - y.GetActualRank()
       }
-      
-      return x.GetActualRank() - y.GetActualRank();
+
+      return x.roundTwoResult - y.roundTwoResult;
 
     })
 
