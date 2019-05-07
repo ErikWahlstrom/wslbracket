@@ -136,6 +136,10 @@ export class RoundOf32 {
       {
         return 1;
       }
+
+      if (x.points !== y.points){
+        return y.points - x.points;
+      }
       
       return x.GetActualRank() - y.GetActualRank();
 
