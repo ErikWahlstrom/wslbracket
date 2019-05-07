@@ -144,8 +144,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Jack Freestone'),
       new Surfer('Kelly Slater'),
       new Surfer('Caio Ibelli'),
-      new Surfer('Someone else'),
-      new Surfer('Some other'),
+      new Surfer('Reef Heazlewood'),
+      new Surfer('Mateus Herdy'),
     ];
   }
 
@@ -173,7 +173,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.GenerateSeeding();
     this.RerankHeatsGc();
     this.GenerateLosersRound();
-    this.RerankLosersGc();
+    //this.RerankLosersGc();
     this.GenerateR32();
   }
 
@@ -294,8 +294,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-          moveItemInArray(heat.heatSurfers, 0, 0);
-          moveItemInArray(heat.heatSurfers, 1, 1);
+          moveItemInArray(heat.heatSurfers, 2, 0);
+          moveItemInArray(heat.heatSurfers, 1, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 2:
