@@ -16,13 +16,13 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
-  tier3Limit = 19;
+  tier3Limit = 24;
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
   nextEventEnumVal = surfEvents.NextEvent;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.BellsBeach;
+  selectedEvent = surfEvents.GoldCoast;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
@@ -122,18 +122,18 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Kanoa Igarashi'),
       new Surfer('Kolohe Andino'),
       new Surfer('Mikey Wright'),
-      new Surfer('John John Florence'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Sebastian Zietz'),
+      new Surfer('John John Florence', 10.93),
+      new Surfer('Willian Cardoso', 8.4),
+      new Surfer('Sebastian Zietz', 8.03),
       new Surfer('Michael Rodrigues'),
-      new Surfer('Jeremy Flores'),
+      new Surfer('Jeremy Flores', 8.9),
       new Surfer('Adrian Buchan'),
       new Surfer('Griffin Colapinto'),
-      new Surfer('Ezekiel Lau'),
+      new Surfer('Ezekiel Lau', 10.47),
       new Surfer('Yago Dora'),
       new Surfer('Joan Duru'),
       new Surfer('Seth Moniz'),
-      new Surfer('Ryan Callinan'),
+      new Surfer('Ryan Callinan', 13.57),
       new Surfer('Peterson Crisanto'),
       new Surfer('Jesse Mendes'),
       new Surfer('Deivid Silva'),
@@ -299,8 +299,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
         case 1:
-          moveItemInArray(heat.heatSurfers, 2, 0);
-          moveItemInArray(heat.heatSurfers, 1, 2);
+          moveItemInArray(heat.heatSurfers, 0, 2);
           this.ReorderHeat(heat.heatSurfers);
           break;
         case 2:
