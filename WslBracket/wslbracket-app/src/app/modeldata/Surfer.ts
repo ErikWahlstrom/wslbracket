@@ -134,6 +134,18 @@ export class RoundOf32 {
         return x.GetActualRank() - y.GetActualRank();
       }
 
+      if (x.roundOneResult === 1) {
+        return -1;
+      }
+      if (y.roundOneResult === 1) {
+        return 1;
+      }
+
+      if (x.tier === 1)
+      {
+        return x.GetActualRank() - y.GetActualRank();
+      }
+
       if (x.tier === 4) {
         if (x.roundOneResult === 1) {
           return -1;
