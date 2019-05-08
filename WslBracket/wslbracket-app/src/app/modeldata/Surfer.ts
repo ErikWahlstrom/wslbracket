@@ -180,6 +180,7 @@ export class RoundOf32 {
       //new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31 - 13]),
 
       new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31 - 5]),
+      new TwoManHeat(4, qualifiedSurfers[10], qualifiedSurfers[31 - 10]),
 
 
 
@@ -187,7 +188,7 @@ export class RoundOf32 {
       //new TwoManHeat(6, qualifiedSurfers[14], qualifiedSurfers[31 - 14]),
 
       new TwoManHeat(7, qualifiedSurfers[6], qualifiedSurfers[31 - 6]),
-      //new TwoManHeat(8, qualifiedSurfers[10], qualifiedSurfers[31 - 10]),
+
       new TwoManHeat(8, qualifiedSurfers[9], qualifiedSurfers[31 - 9]),
 
       new TwoManHeat(9, qualifiedSurfers[0], qualifiedSurfers[31]),
