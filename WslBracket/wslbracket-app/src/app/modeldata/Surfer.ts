@@ -166,32 +166,32 @@ export class RoundOf32 {
     this.heats = [
 
       new TwoManHeat(1, qualifiedSurfers[2], qualifiedSurfers[29]),
-      new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31 - 13]),
+      //new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31 - 13]),
 
-      //new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31 - 5]),
-      //new TwoManHeat(4, qualifiedSurfers[8], qualifiedSurfers[31 - 8]),
+      new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31 - 5]),
+      new TwoManHeat(4, qualifiedSurfers[8], qualifiedSurfers[31 - 8]),
 
 
 
       new TwoManHeat(5, qualifiedSurfers[1], qualifiedSurfers[30]),
-      new TwoManHeat(6, qualifiedSurfers[14], qualifiedSurfers[31 - 14]),
+      //new TwoManHeat(6, qualifiedSurfers[14], qualifiedSurfers[31 - 14]),
 
-      //new TwoManHeat(7, qualifiedSurfers[6], qualifiedSurfers[31 - 6]),
+      new TwoManHeat(7, qualifiedSurfers[6], qualifiedSurfers[31 - 6]),
       //new TwoManHeat(8, qualifiedSurfers[10], qualifiedSurfers[31 - 10]),
 
 
       new TwoManHeat(9, qualifiedSurfers[0], qualifiedSurfers[31]),
-      new TwoManHeat(10, qualifiedSurfers[15], qualifiedSurfers[31 - 15]),
+      //new TwoManHeat(10, qualifiedSurfers[15], qualifiedSurfers[31 - 15]),
 
       //new TwoManHeat(11, qualifiedSurfers[11], qualifiedSurfers[31 - 11]),
-      //new TwoManHeat(12, qualifiedSurfers[7], qualifiedSurfers[31 - 7]),
+      new TwoManHeat(12, qualifiedSurfers[7], qualifiedSurfers[31 - 7]),
 
 
       new TwoManHeat(13, qualifiedSurfers[3], qualifiedSurfers[28]),
-      new TwoManHeat(14, qualifiedSurfers[12], qualifiedSurfers[31 - 12]),
+      //new TwoManHeat(14, qualifiedSurfers[12], qualifiedSurfers[31 - 12]),
 
-      //new TwoManHeat(15, qualifiedSurfers[9], qualifiedSurfers[31 - 9]),
-      //new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31 - 4]),
+      new TwoManHeat(15, qualifiedSurfers[9], qualifiedSurfers[31 - 9]),
+      new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31 - 4]),
 
     ];
   }
