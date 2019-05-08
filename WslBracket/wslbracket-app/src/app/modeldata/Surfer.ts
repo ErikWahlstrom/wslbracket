@@ -126,52 +126,15 @@ export class RoundOf32 {
         return x.GetActualTier() - y.GetActualTier();
       }
 
-      if (x.roundOneResult === 1 && y.roundOneResult === 1) {
-        return x.GetActualRank() - y.GetActualRank();
-      }
-
-      if (x.roundOneResult === 2 && y.roundOneResult === 2) {
-        return x.GetActualRank() - y.GetActualRank();
-      }
-
-      if (x.roundOneResult === 1) {
+      if (x.roundOneResult === 1 && y.roundOneResult !== 1) {
         return -1;
       }
-      if (y.roundOneResult === 1) {
+      if (y.roundOneResult === 1 && x.roundOneResult !== 1) {
         return 1;
-      }
-
-      if (x.tier === 1 || x.tier === 2 || x.tier === 3) {
-        return x.GetActualRank() - y.GetActualRank();
-      }
-
-      if (x.tier === 4) {
-        if (x.roundOneResult === 1) {
-          return -1;
-        }
-        if (y.roundOneResult === 1) {
-          return 1;
-        }
-
-
-        return x.GetActualRank() - y.GetActualRank();
-
-      }
-
-
-      if (x.roundOneResult < 3) {
-        return x.roundOneResult - y.roundOneResult;
-      }
-
-      if (y.roundOneResult < 3) {
-        return x.roundOneResult - y.roundOneResult;
       }
 
       return x.GetActualRank() - y.GetActualRank();
       });
-
-
-    // const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
 
     this.orderedSurfers = qualifiedSurfers;
     this.heats = [
