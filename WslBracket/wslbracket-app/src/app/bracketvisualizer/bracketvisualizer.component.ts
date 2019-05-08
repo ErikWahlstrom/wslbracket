@@ -16,7 +16,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
-  tier3Limit = 24;
+  tier3Limit = 25;
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
   nextEventEnumVal = surfEvents.NextEvent;
