@@ -4,7 +4,7 @@ export class Surfer {
   tier = 0;
   actualRank?: number;
   actualTier?: number;
-  
+
   points = 0;
   tierHighScore: any;
   roundOneResult: number;
@@ -15,7 +15,7 @@ export class Surfer {
     if (actualRank !== undefined) {
       this.actualTier = 4;
     }
-    if (points !== undefined){
+    if (points !== undefined) {
       this.points = points;
     }
 
@@ -84,7 +84,7 @@ export class LosersBracket {
       new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
       new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
       new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
-      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]),];
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
   }
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
@@ -100,90 +100,92 @@ export class RoundOf32 {
   heats: TwoManHeat[];
   orderedSurfers: Surfer[];
   constructor(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
-    
-    
-    
+
+
+
     seededSurfers.heats.forEach(element => {
       element.heatSurfers[0].surfer.roundOneResult = 1;
       element.heatSurfers[1].surfer.roundOneResult = 2;
       element.heatSurfers[2].surfer.roundOneResult = 3;
       });
-    
+
 
     surfersFromLosers.heats.forEach(element => {
       element.heatSurfers[0].surfer.roundTwoResult = 1;
       element.heatSurfers[1].surfer.roundTwoResult = 2;
       element.heatSurfers[2].surfer.roundTwoResult = 3;
-      
+
     });
 
-    const qualifiedSurfers = surfersFromLosers.heats.concat(seededSurfers.heats).map(x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
-    
-    qualifiedSurfers.sort((x,y)=>{
+    const qualifiedSurfers =
+    surfersFromLosers.heats.concat(seededSurfers.heats).map(
+      x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
+
+    qualifiedSurfers.sort((x, y) => {
       if (x.GetActualTier() !== y.GetActualTier()) {
         return x.GetActualTier() - y.GetActualTier();
       }
 
       if (x.roundOneResult === 1 && y.roundOneResult === 1) {
-        return x.GetActualRank() - y.GetActualRank()
+        return x.GetActualRank() - y.GetActualRank();
       }
 
       if (x.roundOneResult === 2 && y.roundOneResult === 2) {
-        return x.GetActualRank() - y.GetActualRank()
+        return x.GetActualRank() - y.GetActualRank();
       }
 
       if (x.tier === 4) {
-        if (x.roundOneResult === 1){
+        if (x.roundOneResult === 1) {
           return -1;
         }
-        if (y.roundOneResult === 1){
+        if (y.roundOneResult === 1) {
           return 1;
         }
-        
-        
-        return x.GetActualRank() - y.GetActualRank()
+
+
+        return x.GetActualRank() - y.GetActualRank();
 
       }
 
 
-      if (x.roundOneResult < 3){
+      if (x.roundOneResult < 3) {
         return x.roundOneResult - y.roundOneResult;
       }
 
-      if (y.roundOneResult < 3){
+      if (y.roundOneResult < 3) {
         return x.roundOneResult - y.roundOneResult;
       }
-      
-      return x.GetActualRank() - y.GetActualRank()
-      })
+
+      return x.GetActualRank() - y.GetActualRank();
+      });
 
 
-    //const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
-    
+    // const orderedArray = this.getSurfersToRoundOf32(seededSurfers, surfersFromLosers);
+
     this.orderedSurfers = qualifiedSurfers;
     this.heats = [
       new TwoManHeat(1, qualifiedSurfers[2], qualifiedSurfers[29]),
-      new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31-13]),
-      new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31-5]),
-      new TwoManHeat(4, qualifiedSurfers[8], qualifiedSurfers[31-8]),
-      
+      new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31 - 13]),
+      new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31 - 5]),
+      new TwoManHeat(4, qualifiedSurfers[8], qualifiedSurfers[31 - 8]),
+
 
       new TwoManHeat(5, qualifiedSurfers[1], qualifiedSurfers[30]),
-      new TwoManHeat(6, qualifiedSurfers[14], qualifiedSurfers[31-14]),
-      new TwoManHeat(7, qualifiedSurfers[6], qualifiedSurfers[31-6]),
-      new TwoManHeat(8, qualifiedSurfers[10], qualifiedSurfers[31-10]),
+      new TwoManHeat(6, qualifiedSurfers[14], qualifiedSurfers[31 - 14]),
+      new TwoManHeat(7, qualifiedSurfers[6], qualifiedSurfers[31 - 6]),
+      new TwoManHeat(8, qualifiedSurfers[10], qualifiedSurfers[31 - 10]),
 
       new TwoManHeat(9, qualifiedSurfers[0], qualifiedSurfers[31]),
-      new TwoManHeat(10, qualifiedSurfers[15], qualifiedSurfers[31-15]),
-      new TwoManHeat(11, qualifiedSurfers[11], qualifiedSurfers[31-11]),
-      new TwoManHeat(12, qualifiedSurfers[7], qualifiedSurfers[31-7]),
+      new TwoManHeat(10, qualifiedSurfers[15], qualifiedSurfers[31 - 15]),
+      new TwoManHeat(11, qualifiedSurfers[11], qualifiedSurfers[31 - 11]),
+      new TwoManHeat(12, qualifiedSurfers[7], qualifiedSurfers[31 - 7]),
 
 
       new TwoManHeat(13, qualifiedSurfers[3], qualifiedSurfers[28]),
-      new TwoManHeat(14, qualifiedSurfers[12], qualifiedSurfers[31-12]),
-      new TwoManHeat(15, qualifiedSurfers[9], qualifiedSurfers[31-9]),
+      new TwoManHeat(14, qualifiedSurfers[12], qualifiedSurfers[31 - 12]),
+      new TwoManHeat(15, qualifiedSurfers[9], qualifiedSurfers[31 - 9]),
 
-      new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31-4]),
+      new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31 - 4]),
 
     ];
   }
@@ -200,7 +202,7 @@ export class RoundOf32 {
     orderedLosers.forEach(loser => {
       const tier = loser.surfer.GetActualTier();
       const winnersWithSameTier = orderedWinners.filter(x => x.surfer.GetActualTier() === tier);
-      const betterRanked = winnersWithSameTier.filter(x => x.surfer.GetActualRank() < loser.surfer.GetActualRank())
+      const betterRanked = winnersWithSameTier.filter(x => x.surfer.GetActualRank() < loser.surfer.GetActualRank());
       let indexOfLast = 0;
       if (betterRanked.length > 0) {
         indexOfLast = orderedWinners.indexOf(betterRanked[betterRanked.length - 1]);
