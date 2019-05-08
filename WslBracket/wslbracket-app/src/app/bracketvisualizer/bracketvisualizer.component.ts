@@ -16,7 +16,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
-  tier3Limit = 25;
+  tier3Limit = 24;
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
   nextEventEnumVal = surfEvents.NextEvent;
@@ -237,8 +237,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   SetRankings() {
     for (let index = 0; index < this.surfers.length; index++) {
-      const replacementSurfers = this.surfers.filter(x => x.actualRank !== undefined && x.actualRank < (index + 1)).length;
-      const rank = index + 1 + replacementSurfers;
+      const replacementSurfers = this.surfers.filter(x => (x.actualRank !== undefined) && (this.surfers.indexOf(x) < index)).length;
+      const rank = index + 1 - replacementSurfers;
       const surfer = this.surfers[index];
       surfer.rank = rank;
       if (rank <= this.tier1Limit) {
