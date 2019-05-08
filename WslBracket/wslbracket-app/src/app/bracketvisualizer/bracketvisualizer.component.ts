@@ -22,7 +22,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   nextEventEnumVal = surfEvents.NextEvent;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.GoldCoast;
+  selectedEvent = surfEvents.BellsBeach;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
