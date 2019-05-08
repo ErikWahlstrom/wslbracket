@@ -70,7 +70,7 @@
 <div class="round-32-rankings mat-body-1">
   Ranking after seeding round:
   <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
-    <div [className]="selectedSurfer === surfer ? 'example-box-highlight' : 'example-box'" [style.background-color]="'rgba(0,0,0,'+surfer.tier/10+')'" (click)="selectSurfer(surfer)">
+    <div [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.tier === 1, 'background-second-tier': surfer.tier === 2, 'background-third-tier': surfer.tier === 3, 'background-fourth-tier': surfer.tier === 4 }" (click)="selectSurfer(surfer)">
       <app-surfer [surfer]="surfer"></app-surfer>
     </div>
   </ng-container>
