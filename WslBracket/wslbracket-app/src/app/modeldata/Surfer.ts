@@ -196,30 +196,6 @@ export class RoundOf32 {
     ];
   }
 
-  getSurfersToRoundOf32(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
-    const losersWinners = surfersFromLosers.heats.map(x => [x.heatSurfers[0], x.heatSurfers[1]]).reduce((a, b) => a.concat(b));
-    const seededWinners = seededSurfers.heats.map(x => [x.heatSurfers[0], x.heatSurfers[1]]).reduce((a, b) => a.concat(b));
-
-    const orderedWinners = this.orderSurfersFromHeat(seededWinners);
-    const orderedLosers = losersWinners.sort((x, y) => {
-      return x.surfer.GetActualRank() - y.surfer.GetActualRank();
-    });
-
-    orderedLosers.forEach(loser => {
-      const tier = loser.surfer.GetActualTier();
-      const winnersWithSameTier = orderedWinners.filter(x => x.surfer.GetActualTier() === tier);
-      const betterRanked = winnersWithSameTier.filter(x => x.surfer.GetActualRank() < loser.surfer.GetActualRank());
-      let indexOfLast = 0;
-      if (betterRanked.length > 0) {
-        indexOfLast = orderedWinners.indexOf(betterRanked[betterRanked.length - 1]);
-      } else {
-        indexOfLast = orderedWinners.indexOf(winnersWithSameTier[winnersWithSameTier.length - 1]);
-      }
-      orderedWinners.splice(indexOfLast + 1, 0, loser);
-    });
-    return orderedWinners.map(x => x.surfer);
-  }
-
   orderSurfersFromHeat(seededWinners: HeatSurfer[]) {
     seededWinners.sort((x, y) => {
       if (x.surfer.GetActualTier() !== y.surfer.GetActualTier()) {
