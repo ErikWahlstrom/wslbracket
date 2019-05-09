@@ -3,7 +3,6 @@ import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvent
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
 import { LineCoordinates, Coords } from './lineCoordinates';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -43,13 +42,13 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Kanoa Igarashi'),
       new Surfer('Mikey Wright'),
       new Surfer('Willian Cardoso'),
-      new Surfer('Reef Heazlewood', 35),
+      new Surfer('Reef Heazlewood', 34),
       new Surfer('Yago Dora'),
       new Surfer('Seth Moniz'),
       new Surfer('Michael Rodrigues'),
       new Surfer('Jeremy Flores'),
       new Surfer('Adrian Buchan'),
-      new Surfer('Xavier Huxtable', 36),
+      new Surfer('Xavier Huxtable', 35),
       new Surfer('Ezekiel Lau'),
       new Surfer('Joan Duru'),
       new Surfer('Ryan Callinan'),
@@ -64,7 +63,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Kelly Slater'),
       new Surfer('Caio Ibelli'),
       new Surfer('Jacob Willcox'),
-      new Surfer('Harrison Mann'),
+      new Surfer('Harrison Mann', 36),
     ];
   }
 
@@ -134,7 +133,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Yago Dora'),
       new Surfer('Joan Duru'),
       new Surfer('Seth Moniz'),
-      new Surfer('Ryan Callinan', 13.57),
+      new Surfer('Ryan Callinan'),
       new Surfer('Peterson Crisanto'),
       new Surfer('Jesse Mendes'),
       new Surfer('Deivid Silva'),
