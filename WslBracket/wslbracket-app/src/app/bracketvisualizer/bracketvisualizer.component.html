@@ -52,28 +52,35 @@
   </ng-container>
 </div>
 
-<div class="losing-heat mat-body-1">Losing Heats:
-  <ng-container *ngIf="losersRound?.heats">
-    <div *ngFor="let heat of losersRound.heats">
-      <div>Heat: {{heat.heatnumber}}</div>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
-        [cdkDropListData]="heat.heatSurfers">
-        <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
-            [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
-            (click)="selectSurfer(surfer.surfer)">
-            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-            <app-surfer [surfer]="surfer.surfer"></app-surfer>
-            <div>{{surfer.heatRank}}</div>
-          </div>
-        </ng-container>
+
+<div class="losing-heat mat-body-1">
+  <div>
+    Losing Heats:
+    <ng-container *ngIf="losersRound?.heats">
+      <div *ngFor="let heat of losersRound.heats">
+        <div>Heat: {{heat.heatnumber}}</div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
+          [cdkDropListData]="heat.heatSurfers">
+          <ng-container *ngFor="let surfer of heat.heatSurfers">
+            <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
+              [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
+              (click)="selectSurfer(surfer.surfer)">
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              <app-surfer [surfer]="surfer.surfer"></app-surfer>
+              <div>{{surfer.heatRank}}</div>
+            </div>
+          </ng-container>
+        </div>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
+  <div *ngIf="selectedSurfer !== undefined">
+    {{selectedSurfer.name}}
+  </div>
 </div>
 
 <div class="round-32-rankings mat-body-1">
-  Ranking after seeding round:
+  New seeding after seeding round (round 1):
   <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
     <div
       [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.tier === 1, 'background-second-tier': surfer.tier === 2, 'background-third-tier': surfer.tier === 3, 'background-fourth-tier': surfer.tier === 4 }"
