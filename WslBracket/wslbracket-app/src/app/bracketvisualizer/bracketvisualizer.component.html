@@ -74,25 +74,28 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="selectedSurfer !== undefined">
+  <br>
+  <br>
+  <div *ngIf="selectedSurfer !== undefined" class="surfer-detail">
+    Edit surfer info
     <table>
       <tr>
         <td>
           Name
         <td>
-          <input type="text" [(ngModel)]="selectedSurfer.name"> <br>
+          <input type="text" [(ngModel)]="selectedSurfer.name" style="width: 100%">
         </td>
       </tr>
-
       <tr>
         <td>
           Actual Rank
         </td>
         <td>
-          <input type="text" [(ngModel)]="selectedSurfer.actualRank">
+          <input type="number" [(ngModel)]="selectedSurfer.actualRank" style="width: 30%">
         </td>
       </tr>
     </table>
+    <button (click)="ResetRanking(selectedSurfer)">Reset ranking</button>
   </div>
 </div>
 

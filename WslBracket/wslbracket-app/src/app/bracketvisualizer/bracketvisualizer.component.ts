@@ -20,10 +20,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   tier3Limit = 24;
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
-  nextEventEnumVal = surfEvents.NextEvent;
+  nextEventEnumVal = surfEvents.Keramas;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.BellsBeach;
+  selectedEvent = surfEvents.Keramas;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
@@ -162,7 +162,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesBb();
     }
 
-    if (this.selectedEvent === surfEvents.NextEvent) {
+    if (this.selectedEvent === surfEvents.Keramas) {
       this.setInitialValuesNext();
     }
 
@@ -444,5 +444,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   public selectSurfer(surfer: Surfer) {
     this.selectedSurfer = surfer;
     this.setSurferLines(this.allSurferViews);
+  }
+
+  public ResetRanking(surfer: Surfer) {
+    surfer.actualRank = undefined;
   }
 }
