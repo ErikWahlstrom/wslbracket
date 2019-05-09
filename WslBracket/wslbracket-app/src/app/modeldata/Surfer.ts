@@ -1,7 +1,17 @@
 export class Surfer {
   name: string;
+  private _tier = 0;
+  get tier(): number {
+      return this._tier;
+  }
+  set tier(tier: number) {
+      this._tier = tier;
+      if (this.actualRank === undefined){
+        this.actualTier = tier;
+      }
+  }
+
   rank = 0;
-  tier = 0;
   actualRank?: number;
   actualTier?: number;
 
@@ -16,7 +26,7 @@ export class Surfer {
   }
 
   public GetActualTier(): number {
-    return this.actualTier !== undefined ? this.actualTier : this.tier;
+    return this.actualRank !== undefined ? this.actualTier : this.tier;
   }
 
   public GetActualRank(): number {
