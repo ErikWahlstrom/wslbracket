@@ -24,7 +24,7 @@ namespace WslBracket
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "wslbracket-app/dist";
+                configuration.RootPath = "wslbracket-app/dist/wslbracket-app";
             });
         }
 
@@ -48,7 +48,7 @@ namespace WslBracket
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
+                routes.MapRoute(           
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
