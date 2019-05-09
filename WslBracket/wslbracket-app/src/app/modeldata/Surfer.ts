@@ -12,11 +12,14 @@ export class Surfer {
   }
 
   private _actualRank?: number;
-  get actualRank(): number {
+  get actualRank(): number | undefined {
       return this._actualRank;
   }
-  set actualRank(actualRank: number) {
+  set actualRank(actualRank: number | undefined) {
       this._actualRank = actualRank;
+      if (actualRank !== undefined) {
+        this.actualTier = 4;
+      }
   }
 
   rank = 0;
