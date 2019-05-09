@@ -13,10 +13,8 @@ export class Surfer {
 
   rank = 0;
   actualRank?: number;
-  actualTier?: number;
-
-  tierHighScore: any;
-  roundOneResult: number;
+  actualTier = 0;
+  roundOneResult?: number;
   constructor(name: string, actualRank?: number) {
     this.name = name;
     this.actualRank = actualRank;

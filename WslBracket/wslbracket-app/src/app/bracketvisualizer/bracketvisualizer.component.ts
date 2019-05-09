@@ -12,7 +12,7 @@ import { LineCoordinates, Coords } from './lineCoordinates';
 
 export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
-  surfers: Surfer[];
+  surfers: Surfer[] = [new Surfer('Gabriel Medina')];
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
@@ -208,16 +208,18 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     }
     this.lineCoordArr = [new LineCoordinates([new Coords(1, 1)], false)];
     this.allSurferViews = list;
-    this.surfers.forEach(x => {
-      this.lineCoordArr.push(
-        new LineCoordinates(
-          this.allSurferViews.filter(y => y.surfer.name === x.name)
-            .map(viewSurfer => (
-              {
-                x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
-                y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
-              })), this.selectedSurfer === x));
-    });
+    if (this.surfers !== undefined) {
+      this.surfers.forEach(x => {
+        this.lineCoordArr.push(
+          new LineCoordinates(
+            this.allSurferViews.filter(y => y.surfer.name === x.name)
+              .map(viewSurfer => (
+                {
+                  x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
+                  y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
+                })), this.selectedSurfer === x));
+      });
+    }
   }
 
   GenerateLosersRound() {
