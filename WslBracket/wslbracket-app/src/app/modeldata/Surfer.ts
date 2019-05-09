@@ -6,7 +6,7 @@ export class Surfer {
   }
   set tier(tier: number) {
       this._tier = tier;
-      if (this.actualRank === undefined){
+      if (this.actualRank === undefined) {
         this.actualTier = tier;
       }
   }
