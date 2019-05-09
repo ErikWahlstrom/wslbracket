@@ -3,6 +3,7 @@ import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvent
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
 import { LineCoordinates, Coords } from './lineCoordinates';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -412,6 +413,15 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateLosersRound();
+      this.GenerateR32();
+    }
+  }
+
+  onDropLosers(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      const arrayWithData = event.container.data;
+      moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
+      this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateR32();
     }
   }

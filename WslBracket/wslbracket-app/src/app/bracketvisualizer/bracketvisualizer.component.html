@@ -59,7 +59,7 @@
     <ng-container *ngIf="losersRound?.heats">
       <div *ngFor="let heat of losersRound.heats">
         <div>Heat: {{heat.heatnumber}}</div>
-        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
+        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropLosers($event)"
           [cdkDropListData]="heat.heatSurfers">
           <ng-container *ngFor="let surfer of heat.heatSurfers">
             <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
@@ -75,7 +75,24 @@
     </ng-container>
   </div>
   <div *ngIf="selectedSurfer !== undefined">
-    {{selectedSurfer.name}}
+    <table>
+      <tr>
+        <td>
+          Name
+        <td>
+          <input type="text" [(ngModel)]="selectedSurfer.name"> <br>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Actual Rank
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="selectedSurfer.actualRank">
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 

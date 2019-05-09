@@ -9,6 +9,7 @@ import { MatCardModule, MatFormFieldModule, MatSelectModule, MatGridListModule }
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BracketvisualizerComponent } from './bracketvisualizer/bracketvisualizer.component';
 import { SurferComponent } from './surfer/surfer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SurferComponent } from './surfer/surfer.component';
     BracketvisualizerComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -24,7 +26,7 @@ import { SurferComponent } from './surfer/surfer.component';
     MatSelectModule,
     AppRoutingModule,
     DragDropModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

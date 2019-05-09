@@ -11,8 +11,15 @@ export class Surfer {
       }
   }
 
+  private _actualRank?: number;
+  get actualRank(): number {
+      return this._actualRank;
+  }
+  set actualRank(actualRank: number) {
+      this._actualRank = actualRank;
+  }
+
   rank = 0;
-  actualRank?: number;
   actualTier = 0;
   roundOneResult?: number;
   constructor(name: string, actualRank?: number) {
