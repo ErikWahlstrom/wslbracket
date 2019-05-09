@@ -231,8 +231,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       moveItemInArray(this.surfers, event.previousIndex, event.currentIndex);
       this.selectedSurfer = this.surfers[event.currentIndex];
       this.SetRankings();
+      this.GenerateSeeding();
+      this.GenerateLosersRound();
+      this.GenerateR32();
     }
-    this.GenerateSeeding();
   }
 
   SetRankings() {

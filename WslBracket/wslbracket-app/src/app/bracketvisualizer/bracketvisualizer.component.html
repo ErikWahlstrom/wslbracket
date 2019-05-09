@@ -1,5 +1,5 @@
 <div class=floatTL>
-  <svg width=2000 height=2000>
+  <svg width=3000 height=2000>
     <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)"
       [attr.class]="surferview.selected ? 'tracking-line-selected' : 'tracking-line'">
     </polyline>
