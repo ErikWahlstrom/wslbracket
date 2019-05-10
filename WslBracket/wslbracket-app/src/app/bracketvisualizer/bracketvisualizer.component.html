@@ -87,15 +87,23 @@
         </td>
       </tr>
       <tr>
+          <td>
+            Rank
+          </td>
+          <td>
+            {{selectedSurfer.rank}}
+          </td>
+        </tr>
+      <tr>
         <td>
           Actual Rank
         </td>
         <td>
-          <input type="number" [(ngModel)]="selectedSurfer.actualRank" style="width: 30%">
+          <input type="number" [(ngModel)]="selectedSurfer.actualRank" style="width: 50%">
         </td>
       </tr>
     </table>
-    <button (click)="ResetRanking(selectedSurfer)">Reset ranking</button>
+    <button (click)="ResetRanking(selectedSurfer)">Reset actual rank</button>
   </div>
 </div>
 
