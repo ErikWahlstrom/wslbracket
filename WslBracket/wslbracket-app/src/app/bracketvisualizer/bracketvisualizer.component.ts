@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvents } from '../modeldata/Surfer';
+import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvents, ThreeManHeat } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
 import { LineCoordinates, Coords } from './lineCoordinates';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -201,6 +200,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     }
     this.SetRankings();
     this.GenerateSeeding();
+    this.RerankHeatsOwn();
     this.GenerateLosersRound();
     this.GenerateR32();
   }
@@ -431,14 +431,58 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  RerankHeatsOwn() {
+    this.seedingBracket.heats.forEach(heat => {
+      const heatOrder = JSON.parse(localStorage.getItem('seedHeat' + heat.heatnumber));
+      if (heatOrder !== null) {
+        heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
+        heat.heatSurfers[1] = this.getSurferFromNumber(heatOrder[1], heat);
+        heat.heatSurfers[2] = this.getSurferFromNumber(heatOrder[2], heat);
+      }
+    });
+  }
+
+  getSurferFromNumber(numberSurfer: number, heat: ThreeManHeat): HeatSurfer {
+    switch (numberSurfer) {
+      case 1:
+        return heat.heatSurfer1;
+      case 2:
+        return heat.heatSurfer2;
+      case 3:
+        return heat.heatSurfer3;
+    }
+  }
+
   onDropSeed(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       const arrayWithData = event.container.data;
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
+
+      for (let index = 0; index < this.seedingBracket.heats.length; index++) {
+        const element = this.seedingBracket.heats[index];
+        localStorage.setItem('seedHeat' + element.heatnumber, this.getStorageString(element));
+      }
+
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateLosersRound();
       this.GenerateR32();
     }
+  }
+  getStorageString(element: ThreeManHeat): string {
+    const arrayToSave = [
+      this.getNumberFromArray(element.heatSurfers[0], element),
+      this.getNumberFromArray(element.heatSurfers[1], element),
+      this.getNumberFromArray(element.heatSurfers[2], element)]
+    return JSON.stringify(arrayToSave);
+  }
+  getNumberFromArray(surfer: HeatSurfer, heatSurfers: ThreeManHeat) {
+    if (heatSurfers.heatSurfer1 == surfer) {
+      return 1;
+    }
+    if (heatSurfers.heatSurfer2 == surfer) {
+      return 2;
+    }
+    return 3;
   }
 
   onDropLosers(event: CdkDragDrop<string[]>) {
@@ -455,6 +499,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       const rank = index + 1;
       arrayWithData[index].heatRank = rank;
     }
+
   }
 
   GetPoints(linecorr: LineCoordinates) {

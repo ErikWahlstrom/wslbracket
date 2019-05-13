@@ -54,9 +54,15 @@ export class HeatSurfer {
 export class ThreeManHeat {
   heatnumber: number;
   heatSurfers: HeatSurfer[];
+  heatSurfer1: HeatSurfer;
+  heatSurfer2: HeatSurfer;
+  heatSurfer3: HeatSurfer;
   constructor(heatnumber: number, surfer1: Surfer, surfer2: Surfer, surfer3: Surfer) {
     this.heatnumber = heatnumber;
     this.heatSurfers = [new HeatSurfer(1, surfer1), new HeatSurfer(2, surfer2), new HeatSurfer(3, surfer3)];
+    this.heatSurfer1 = this.heatSurfers[0];
+    this.heatSurfer2 = this.heatSurfers[1];
+    this.heatSurfer3 = this.heatSurfers[2];
   }
 }
 
