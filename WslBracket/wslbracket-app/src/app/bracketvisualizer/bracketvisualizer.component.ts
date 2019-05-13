@@ -441,7 +441,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
         heat.heatSurfers[1] = this.getSurferFromNumber(heatOrder[1], heat);
         heat.heatSurfers[2] = this.getSurferFromNumber(heatOrder[2], heat);
-      }
+        this.ReorderHeat(heat.heatSurfers);
+      }      
     });
   }
 
@@ -453,6 +454,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
         heat.heatSurfers[1] = this.getSurferFromNumber(heatOrder[1], heat);
         heat.heatSurfers[2] = this.getSurferFromNumber(heatOrder[2], heat);
+        this.ReorderHeat(heat.heatSurfers);
       }
     });
   }
