@@ -193,8 +193,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   public setInitialValuesOwn() {
     const stringResult = localStorage.getItem(this.surfArrayKey);
+    const jsonSurfers = JSON.parse(stringResult) as Surfer[];
     if (stringResult !== null) {
-      this.surfers = JSON.parse(stringResult) as Surfer[];
+      this.surfers = jsonSurfers.map(x=>new Surfer(x.name, x.actualRank));
     } else {
       this.setInitialValuesKeramas();
     }
