@@ -33,11 +33,11 @@ export class Surfer {
     }
   }
 
-  public GetActualTier(): number {
+  public getActualTier(): number {
     return this.actualRank !== undefined ? this.actualTier : this.tier;
   }
 
-  public GetActualRank(): number {
+  public getActualRank(): number {
     return this.actualRank !== undefined ? this.actualRank : this.rank;
   }
 }
@@ -102,7 +102,7 @@ export class LosersBracket {
   getSurfersFromSeeding(surfers: SeedingBracket) {
     const unorderedSurfers = surfers.heats.map(x => x.heatSurfers[2].surfer);
     const ordered = unorderedSurfers.sort((x, y) => {
-      return x.GetActualRank() - y.GetActualRank();
+      return x.getActualRank() - y.getActualRank();
     });
     return ordered;
   }
@@ -126,8 +126,8 @@ export class RoundOf32 {
         x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
 
     qualifiedSurfers.sort((x, y) => {
-      if (x.GetActualTier() !== y.GetActualTier()) {
-        return x.GetActualTier() - y.GetActualTier();
+      if (x.getActualTier() !== y.getActualTier()) {
+        return x.getActualTier() - y.getActualTier();
       }
 
       if (x.roundOneResult === 1 && y.roundOneResult !== 1) {
@@ -137,7 +137,7 @@ export class RoundOf32 {
         return 1;
       }
 
-      return x.GetActualRank() - y.GetActualRank();
+      return x.getActualRank() - y.getActualRank();
     });
 
     this.orderedSurfers = qualifiedSurfers;
@@ -165,14 +165,14 @@ export class RoundOf32 {
 
   orderSurfersFromHeat(seededWinners: HeatSurfer[]) {
     seededWinners.sort((x, y) => {
-      if (x.surfer.GetActualTier() !== y.surfer.GetActualTier()) {
-        return x.surfer.GetActualTier() - y.surfer.GetActualTier();
+      if (x.surfer.getActualTier() !== y.surfer.getActualTier()) {
+        return x.surfer.getActualTier() - y.surfer.getActualTier();
       }
 
       if ((x.heatRank === 1 || y.heatRank === 1) && x.heatRank !== y.heatRank) {
         return x.heatRank - y.heatRank;
       }
-      return x.surfer.GetActualRank() - y.surfer.GetActualRank();
+      return x.surfer.getActualRank() - y.surfer.getActualRank();
     });
     return seededWinners;
   }
@@ -182,6 +182,7 @@ export enum surfEvents {
   GoldCoast,
   BellsBeach,
   Keramas,
+  User,
   None,
 }
 

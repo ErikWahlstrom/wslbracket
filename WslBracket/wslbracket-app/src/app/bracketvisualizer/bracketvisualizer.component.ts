@@ -3,6 +3,7 @@ import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvent
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
 import { LineCoordinates, Coords } from './lineCoordinates';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-bracketvisualizer',
@@ -19,13 +20,15 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   tier3Limit = 24;
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
-  nextEventEnumVal = surfEvents.Keramas;
+  keramasEventEnumVal = surfEvents.Keramas;
+  userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
   selectedEvent = surfEvents.Keramas;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
+  private surfArrayKey = 'surferarray';
   getBellsBeachSurfers(): Surfer[] {
     return [
       new Surfer('Gabriel Medina'),
@@ -162,9 +165,12 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     }
 
     if (this.selectedEvent === surfEvents.Keramas) {
-      this.setInitialValuesNext();
+      this.setInitialValuesKeramas();
     }
 
+    if (this.selectedEvent === surfEvents.User) {
+      this.setInitialValuesOwn();
+    }
   }
 
   public setInitialValuesGc() {
@@ -177,8 +183,19 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.GenerateR32();
   }
 
-  public setInitialValuesNext() {
+  public setInitialValuesKeramas() {
     this.surfers = this.getKeramasSurfers();
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.GenerateLosersRound();
+    this.GenerateR32();
+  }
+
+  public setInitialValuesOwn() {
+    const stringResult = localStorage.getItem(this.surfArrayKey);
+    if (stringResult !== null) {
+      this.surfers = JSON.parse(stringResult) as Surfer[];
+    }
     this.SetRankings();
     this.GenerateSeeding();
     this.GenerateLosersRound();
@@ -238,6 +255,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.GenerateSeeding();
       this.GenerateLosersRound();
       this.GenerateR32();
+
+      localStorage.setItem(this.surfArrayKey, JSON.stringify(this.surfers));
+
+
+
     }
   }
 
