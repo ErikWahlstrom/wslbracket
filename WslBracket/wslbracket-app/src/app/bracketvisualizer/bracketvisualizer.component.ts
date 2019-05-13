@@ -195,6 +195,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     const stringResult = localStorage.getItem(this.surfArrayKey);
     if (stringResult !== null) {
       this.surfers = JSON.parse(stringResult) as Surfer[];
+    } else {
+      this.setInitialValuesKeramas();
     }
     this.SetRankings();
     this.GenerateSeeding();
