@@ -19,48 +19,27 @@
   <button class="mat-button" (click)="setInitialValues()">Reset bracket to actual result for event</button>
 </div>
 
-<div class="ranking-area mat-body-1">
-  Seed the surfers by dragging up and down
-  <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
-    <ng-container *ngFor="let surfer of surfers; let i=index">
-      <div
-        [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.actualTier === 1, 'background-second-tier': surfer.actualTier === 2, 'background-third-tier': surfer.actualTier === 3, 'background-fourth-tier': surfer.actualTier === 4 }"
-        cdkDrag (click)="selectSurfer(surfer)">
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <app-surfer [surfer]="surfer"></app-surfer>
-      </div>
-    </ng-container>
-  </div>
-</div>
+<div class="flexbox-layout">
 
-<div class="seeding-heat mat-body-1">Seeding Heats:
-  <ng-container *ngIf="seedingBracket?.heats">
-    <div *ngFor="let heat of seedingBracket.heats">
-      <div style="width:10">Heat: {{heat.heatnumber}}</div>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
-        [cdkDropListData]="heat.heatSurfers">
-        <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
-            [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
-            (click)="selectSurfer(surfer.surfer)">
-            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-            <app-surfer [surfer]="surfer.surfer"></app-surfer>
-            <div>{{surfer.heatRank}}</div>
-          </div>
-        </ng-container>
-      </div>
+  <div class="ranking-area mat-body-1">
+    Seed the surfers by dragging up and down
+    <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
+      <ng-container *ngFor="let surfer of surfers; let i=index">
+        <div
+          [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.actualTier === 1, 'background-second-tier': surfer.actualTier === 2, 'background-third-tier': surfer.actualTier === 3, 'background-fourth-tier': surfer.actualTier === 4 }"
+          cdkDrag (click)="selectSurfer(surfer)">
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <app-surfer [surfer]="surfer"></app-surfer>
+        </div>
+      </ng-container>
     </div>
-  </ng-container>
-</div>
+  </div>
 
-
-<div class="losing-heat mat-body-1">
-  <div>
-    Losing Heats:
-    <ng-container *ngIf="losersRound?.heats">
-      <div *ngFor="let heat of losersRound.heats">
-        <div>Heat: {{heat.heatnumber}}</div>
-        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropLosers($event)"
+  <div class="seeding-heat mat-body-1">Seeding Heats:
+    <ng-container *ngIf="seedingBracket?.heats">
+      <div *ngFor="let heat of seedingBracket.heats">
+        <div style="width:10">Heat: {{heat.heatnumber}}</div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
           [cdkDropListData]="heat.heatSurfers">
           <ng-container *ngFor="let surfer of heat.heatSurfers">
             <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
@@ -75,19 +54,42 @@
       </div>
     </ng-container>
   </div>
-  <br>
-  <br>
-  <div *ngIf="selectedSurfer !== undefined" class="surfer-detail">
-    Edit surfer info
-    <table>
-      <tr>
-        <td>
-          Name
-        <td>
-          <input type="text" [(ngModel)]="selectedSurfer.name" style="width: 100%">
-        </td>
-      </tr>
-      <tr>
+
+
+  <div class="losing-heat mat-body-1">
+    <div>
+      Losing Heats:
+      <ng-container *ngIf="losersRound?.heats">
+        <div *ngFor="let heat of losersRound.heats">
+          <div>Heat: {{heat.heatnumber}}</div>
+          <div cdkDropList class="example-list" (cdkDropListDropped)="onDropLosers($event)"
+            [cdkDropListData]="heat.heatSurfers">
+            <ng-container *ngFor="let surfer of heat.heatSurfers">
+              <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
+                [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
+                (click)="selectSurfer(surfer.surfer)">
+                <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+                <app-surfer [surfer]="surfer.surfer"></app-surfer>
+                <div>{{surfer.heatRank}}</div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+    <br>
+    <div *ngIf="selectedSurfer !== undefined" class="surfer-detail">
+      Edit surfer info
+      <table>
+        <tr>
+          <td>
+            Name
+          <td>
+            <input type="text" [(ngModel)]="selectedSurfer.name" style="width: 100%">
+          </td>
+        </tr>
+        <tr>
           <td>
             Rank
           </td>
@@ -95,47 +97,48 @@
             {{selectedSurfer.rank}}
           </td>
         </tr>
-      <tr>
-        <td>
-          Actual Rank
-        </td>
-        <td>
-          <input type="number" [(ngModel)]="selectedSurfer.actualRank" style="width: 50%">
-        </td>
-      </tr>
-    </table>
-    <button (click)="ResetRanking(selectedSurfer)">Reset actual rank</button>
-    <br> Actual rank will only be used for the R3 reseeding.
+        <tr>
+          <td>
+            Actual Rank
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="selectedSurfer.actualRank" style="width: 50%">
+          </td>
+        </tr>
+      </table>
+      <button (click)="ResetRanking(selectedSurfer)">Reset actual rank</button>
+      <br> Actual rank will only be used for the R3 reseeding.
+    </div>
   </div>
-</div>
 
-<div class="round-32-rankings mat-body-1">
-  New seeding after seeding round (round 1):
-  <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
-    <div
-      [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.actualTier === 1, 'background-second-tier': surfer.actualTier === 2, 'background-third-tier': surfer.actualTier === 3, 'background-fourth-tier': surfer.actualTier === 4 }"
-      (click)="selectSurfer(surfer)">
-      <app-surfer [surfer]="surfer"></app-surfer>
-    </div>
-  </ng-container>
-</div>
-
-<div class="round-32 mat-body-1">Round of 32:
-  <ng-container *ngIf="roundOf32?.heats">
-    <div *ngFor="let heat of roundOf32.heats">
-      <div>Heat: {{heat.heatnumber}}</div>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
-        [cdkDropListData]="heat.heatSurfers">
-        <ng-container *ngFor="let surfer of heat.heatSurfers">
-          <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
-            [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
-            (click)="selectSurfer(surfer.surfer)">
-            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-            <app-surfer [surfer]="surfer.surfer"></app-surfer>
-            <div>{{surfer.heatRank}}</div>
-          </div>
-        </ng-container>
+  <div class="round-32-rankings mat-body-1">
+    New seeding after seeding round (round 1):
+    <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
+      <div
+        [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.actualTier === 1, 'background-second-tier': surfer.actualTier === 2, 'background-third-tier': surfer.actualTier === 3, 'background-fourth-tier': surfer.actualTier === 4 }"
+        (click)="selectSurfer(surfer)">
+        <app-surfer [surfer]="surfer"></app-surfer>
       </div>
-    </div>
-  </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="round-32 mat-body-1">Round of 32:
+    <ng-container *ngIf="roundOf32?.heats">
+      <div *ngFor="let heat of roundOf32.heats">
+        <div>Heat: {{heat.heatnumber}}</div>
+        <div cdkDropList class="example-list" (cdkDropListDropped)="onDropSeed($event)"
+          [cdkDropListData]="heat.heatSurfers">
+          <ng-container *ngFor="let surfer of heat.heatSurfers">
+            <div [className]="selectedSurfer === surfer.surfer ? 'example-box-highlight' : 'example-box'"
+              [style.background-color]="'rgba(0,0,0,'+surfer.heatRank/10+')'" cdkDrag
+              (click)="selectSurfer(surfer.surfer)">
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              <app-surfer [surfer]="surfer.surfer"></app-surfer>
+              <div>{{surfer.heatRank}}</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
