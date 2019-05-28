@@ -25,7 +25,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.Margies;
+  selectedEvent = surfEvents.Keramas;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
@@ -107,8 +107,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Jadson Andre'),
       new Surfer('Jack Freestone'),
       new Surfer('Caio Ibelli'),
-      new Surfer('Surfer 35#'),
-      new Surfer('Surfer 36#'),
+      new Surfer('Jacob Willcox'),
+      new Surfer('Rio Waida'),
     ];
   }
 
@@ -233,7 +233,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.surfers = this.getKeramasSurfers();
     this.SetRankings();
     this.GenerateSeeding();
+    this.RerankHeatsKeramas();
     this.GenerateLosersRound();
+    this.RerankLosersKeramas();
     this.GenerateR32();
   }
 
@@ -379,6 +381,21 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  RerankLosersKeramas() {
+    let heat = this.losersRound.heats[1];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.losersRound.heats[2];
+    heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(3, heat);
+    heat = this.losersRound.heats[3];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+  }
+
   RerankHeatsGc() {
     this.seedingBracket.heats.forEach(heat => {
       switch (heat.heatnumber) {
@@ -430,6 +447,45 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
           break;
       }
     });
+  }
+
+  RerankHeatsKeramas() {
+    let heat = this.seedingBracket.heats[1];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[2];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[3];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[5];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[6];
+    heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(3, heat);
+    heat = this.seedingBracket.heats[8];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[9];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[10];
+    heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(1, heat);
+    heat = this.seedingBracket.heats[11];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
   }
 
   RerankHeatsBb() {
