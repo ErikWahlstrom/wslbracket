@@ -128,8 +128,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Owen Wright'),
       new Surfer('Michel Bourez'),
       new Surfer('Willian Cardoso'),
-     new Surfer('Michael Rodrigues'),
-     new Surfer('Ryan Callinan'),
+      new Surfer('Michael Rodrigues'),
+      new Surfer('Ryan Callinan'),
       new Surfer('Seth Moniz'),
       new Surfer('Adrian Buchan'),
       new Surfer('Kelly Slater'),
@@ -316,8 +316,14 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.GenerateSeeding();
       this.GenerateLosersRound();
       this.GenerateR32();
-      localStorage.setItem(this.surfArrayKey, JSON.stringify(this.surfers));
-      this.selectedEvent = surfEvents.User;
+      let save = true;
+      if (this.selectedEvent !== surfEvents.User) {
+        save = confirm('Save change to users event?');
+      }
+      if (save) {
+        localStorage.setItem(this.surfArrayKey, JSON.stringify(this.surfers));
+        this.selectedEvent = surfEvents.User;
+      }
     }
   }
 
@@ -584,12 +590,18 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       const arrayWithData = event.container.data;
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
 
-      for (let index = 0; index < this.seedingBracket.heats.length; index++) {
-        const element = this.seedingBracket.heats[index];
-        localStorage.setItem('seedHeat' + element.heatnumber, this.getStorageString(element));
+      let save = true;
+      if (this.selectedEvent !== surfEvents.User) {
+        save = confirm('Save change to users event?');
       }
+      if (save) {
 
-      this.selectedEvent = surfEvents.User;
+        for (let index = 0; index < this.seedingBracket.heats.length; index++) {
+          const element = this.seedingBracket.heats[index];
+          localStorage.setItem('seedHeat' + element.heatnumber, this.getStorageString(element));
+        }
+        this.selectedEvent = surfEvents.User;
+      }
 
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateLosersRound();
@@ -618,12 +630,19 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       const arrayWithData = event.container.data;
       moveItemInArray(arrayWithData, event.previousIndex, event.currentIndex);
 
-      for (let index = 0; index < this.seedingBracket.heats.length; index++) {
-        const element = this.seedingBracket.heats[index];
-        localStorage.setItem('loserHeat' + element.heatnumber, this.getStorageString(element));
+      let save = true;
+      if (this.selectedEvent !== surfEvents.User) {
+        save = confirm('Save change to users event?');
       }
+      if (save) {
 
-      this.selectedEvent = surfEvents.User;
+        for (let index = 0; index < this.seedingBracket.heats.length; index++) {
+          const element = this.seedingBracket.heats[index];
+          localStorage.setItem('loserHeat' + element.heatnumber, this.getStorageString(element));
+        }
+
+        this.selectedEvent = surfEvents.User;
+      }
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateR32();
     }
