@@ -114,40 +114,40 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   getMargiesSurfers(): Surfer[] {
     return [
-      new Surfer('Gabriel Medina'),
       new Surfer('Filipe Toledo'),
+      new Surfer('Gabriel Medina'),
       new Surfer('Italo Ferreira'),
       new Surfer('Julian Wilson'),
-      new Surfer('Jordy Smith'),
-      new Surfer('John John Florence'),
-      new Surfer('Owen Wright'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Wade Carmichael'),
       new Surfer('Kanoa Igarashi'),
+      new Surfer('John John Florence'),
+      new Surfer('Jordy Smith'),
+      new Surfer('Kolohe Andino'),
+      new Surfer('Conner Coffin'),
+      new Surfer('Wade Carmichael'),
+      new Surfer('Jeremy Flores'),
+      new Surfer('Owen Wright'),
       new Surfer('Michel Bourez'),
       new Surfer('Willian Cardoso'),
-      new Surfer('Mikey Wright'),
+     new Surfer('Michael Rodrigues'),
+     new Surfer('Ryan Callinan'),
       new Surfer('Seth Moniz'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Yago Dora'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Sebastian Zietz'),
       new Surfer('Adrian Buchan'),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Griffin Colapinto'),
-      new Surfer('Joan Duru'),
-      new Surfer('Ricardo Christie'),
       new Surfer('Kelly Slater'),
+      new Surfer('Yago Dora'),
+      new Surfer('Peterson Crisanto'),
+      new Surfer('Joan Duru'),
+      new Surfer('Deivid Silva'),
+      new Surfer('Sebastian Zietz'),
+      new Surfer('Griffin Colapinto'),
       new Surfer('Jesse Mendes'),
-      new Surfer('Soli Bailey'),
+      new Surfer('Ezekiel Lau'),
       new Surfer('Leonardi Fiorivanti'),
-      new Surfer('Jadson Andre'),
       new Surfer('Jack Freestone'),
+      new Surfer('Ricardo Christie'),
+      new Surfer('Jadson Andre'),
+      new Surfer('Soli Bailey'),
       new Surfer('Caio Ibelli'),
+      new Surfer('Frederico Morais'),
       new Surfer('Surfer 35#'),
       new Surfer('Surfer 36#'),
     ];
@@ -238,7 +238,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   public setInitialValuesMargies() {
-    this.surfers = this.getKeramasSurfers();
+    this.surfers = this.getMargiesSurfers();
     this.SetRankings();
     this.GenerateSeeding();
     this.GenerateLosersRound();
@@ -486,7 +486,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   RerankHeatsOwn() {
     this.seedingBracket.heats.forEach(heat => {
-      const seedOrderString = localStorage.getItem('seedHeat' + heat.heatnumber)
+      const seedOrderString = localStorage.getItem('seedHeat' + heat.heatnumber);
       if (seedOrderString !== null) {
         const heatOrder = JSON.parse(seedOrderString);
         heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
@@ -519,7 +519,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       case 3:
         return heat.heatSurfer3;
     }
-    throw "Non existing surfer in heat";
+    throw new Error('Non existing surfer in heat');
 
   }
 
@@ -544,14 +544,14 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     const arrayToSave = [
       this.getNumberFromArray(element.heatSurfers[0], element),
       this.getNumberFromArray(element.heatSurfers[1], element),
-      this.getNumberFromArray(element.heatSurfers[2], element)]
+      this.getNumberFromArray(element.heatSurfers[2], element)];
     return JSON.stringify(arrayToSave);
   }
   getNumberFromArray(surfer: HeatSurfer, heatSurfers: ThreeManHeat) {
-    if (heatSurfers.heatSurfer1 == surfer) {
+    if (heatSurfers.heatSurfer1 === surfer) {
       return 1;
     }
-    if (heatSurfers.heatSurfer2 == surfer) {
+    if (heatSurfers.heatSurfer2 === surfer) {
       return 2;
     }
     return 3;
