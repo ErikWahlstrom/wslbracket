@@ -148,8 +148,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       new Surfer('Soli Bailey'),
       new Surfer('Caio Ibelli'),
       new Surfer('Frederico Morais'),
-      new Surfer('Surfer 35#'),
-      new Surfer('Surfer 36#'),
+      new Surfer('Jacob Willcox'),
+      new Surfer('Jack Robinson'),
     ];
   }
 
