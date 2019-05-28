@@ -21,10 +21,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   goldCoastEnumVal = surfEvents.GoldCoast;
   bellsEnumVal = surfEvents.BellsBeach;
   keramasEventEnumVal = surfEvents.Keramas;
+  margiesEventEnumVal = surfEvents.Margies;
   userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.Keramas;
+  selectedEvent = surfEvents.Margies;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
@@ -71,6 +72,47 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   }
 
   getKeramasSurfers(): Surfer[] {
+    return [
+      new Surfer('Gabriel Medina'),
+      new Surfer('Filipe Toledo'),
+      new Surfer('Italo Ferreira'),
+      new Surfer('Julian Wilson'),
+      new Surfer('Jordy Smith'),
+      new Surfer('John John Florence'),
+      new Surfer('Owen Wright'),
+      new Surfer('Conner Coffin'),
+      new Surfer('Kolohe Andino'),
+      new Surfer('Wade Carmichael'),
+      new Surfer('Kanoa Igarashi'),
+      new Surfer('Michel Bourez'),
+      new Surfer('Willian Cardoso'),
+      new Surfer('Mikey Wright'),
+      new Surfer('Seth Moniz'),
+      new Surfer('Ryan Callinan'),
+      new Surfer('Jeremy Flores'),
+      new Surfer('Yago Dora'),
+      new Surfer('Michael Rodrigues'),
+      new Surfer('Sebastian Zietz'),
+      new Surfer('Adrian Buchan'),
+      new Surfer('Ezekiel Lau'),
+      new Surfer('Peterson Crisanto'),
+      new Surfer('Deivid Silva'),
+      new Surfer('Griffin Colapinto'),
+      new Surfer('Joan Duru'),
+      new Surfer('Ricardo Christie'),
+      new Surfer('Kelly Slater'),
+      new Surfer('Jesse Mendes'),
+      new Surfer('Soli Bailey'),
+      new Surfer('Leonardi Fiorivanti'),
+      new Surfer('Jadson Andre'),
+      new Surfer('Jack Freestone'),
+      new Surfer('Caio Ibelli'),
+      new Surfer('Surfer 35#'),
+      new Surfer('Surfer 36#'),
+    ];
+  }
+
+  getMargiesSurfers(): Surfer[] {
     return [
       new Surfer('Gabriel Medina'),
       new Surfer('Filipe Toledo'),
@@ -168,6 +210,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesKeramas();
     }
 
+    if (this.selectedEvent === surfEvents.Margies) {
+      this.setInitialValuesMargies();
+    }
+
     if (this.selectedEvent === surfEvents.User) {
       this.setInitialValuesOwn();
     }
@@ -191,13 +237,21 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.GenerateR32();
   }
 
+  public setInitialValuesMargies() {
+    this.surfers = this.getKeramasSurfers();
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.GenerateLosersRound();
+    this.GenerateR32();
+  }
+
   public setInitialValuesOwn() {
     const stringResult = localStorage.getItem(this.surfArrayKey);
     if (stringResult !== null) {
       const jsonSurfers = JSON.parse(stringResult) as Surfer[];
       this.surfers = jsonSurfers.map(x => new Surfer(x.name, x.actualRank));
     } else {
-      this.setInitialValuesKeramas();
+      this.setInitialValuesMargies();
     }
     this.SetRankings();
     this.GenerateSeeding();
@@ -260,11 +314,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.GenerateSeeding();
       this.GenerateLosersRound();
       this.GenerateR32();
-
       localStorage.setItem(this.surfArrayKey, JSON.stringify(this.surfers));
-
-
-
+      this.selectedEvent = surfEvents.User;
     }
   }
 
@@ -442,7 +493,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         heat.heatSurfers[1] = this.getSurferFromNumber(heatOrder[1], heat);
         heat.heatSurfers[2] = this.getSurferFromNumber(heatOrder[2], heat);
         this.ReorderHeat(heat.heatSurfers);
-      }      
+      }
     });
   }
 
@@ -469,7 +520,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         return heat.heatSurfer3;
     }
     throw "Non existing surfer in heat";
-    
+
   }
 
   onDropSeed(event: CdkDragDrop<string[]>) {
@@ -481,6 +532,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         const element = this.seedingBracket.heats[index];
         localStorage.setItem('seedHeat' + element.heatnumber, this.getStorageString(element));
       }
+
+      this.selectedEvent = surfEvents.User;
 
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateLosersRound();
@@ -514,6 +567,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
         localStorage.setItem('loserHeat' + element.heatnumber, this.getStorageString(element));
       }
 
+      this.selectedEvent = surfEvents.User;
       this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
       this.GenerateR32();
     }

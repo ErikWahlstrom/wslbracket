@@ -190,5 +190,6 @@ export enum surfEvents {
   Keramas,
   User,
   None,
+  Margies
 }
 
