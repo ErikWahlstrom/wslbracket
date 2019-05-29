@@ -22,7 +22,7 @@
 <div class="flexbox-layout">
 
   <div class="ranking-area mat-body-1">
-    Seed the surfers by dragging up and down
+    <p>Initial event seeding <br> (reseed by dragging up and down)</p>
     <div cdkDropList class="example-list" (cdkDropListDropped)="onDrop($event)">
       <ng-container *ngFor="let surfer of surfers; let i=index">
         <div
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <div class="seeding-heat mat-body-1">Seeding Heats:
+  <div class="seeding-heat mat-body-1">Seeding Round:
     <ng-container *ngIf="seedingBracket?.heats">
       <div *ngFor="let heat of seedingBracket.heats">
         <div style="width:10">Heat: {{heat.heatnumber}}</div>
@@ -58,7 +58,7 @@
 
   <div class="losing-heat mat-body-1">
     <div>
-      Losing Heats:
+      Losers Round:
       <ng-container *ngIf="losersRound?.heats">
         <div *ngFor="let heat of losersRound.heats">
           <div>Heat: {{heat.heatnumber}}</div>
@@ -103,7 +103,7 @@
   </div>
 
   <div class="round-32-rankings mat-body-1">
-    New seeding after seeding round (round 1):
+    New seeding order <br>(based on results in seeding rounds):
     <ng-container *ngFor="let surfer of roundOf32.orderedSurfers">
       <div
         [ngClass]="{'example-box-highlight': selectedSurfer === surfer, 'example-box': selectedSurfer !== surfer, 'background-first-tier': surfer.actualTier === 1, 'background-second-tier': surfer.actualTier === 2, 'background-third-tier': surfer.actualTier === 3, 'background-fourth-tier': surfer.actualTier === 4 }"
