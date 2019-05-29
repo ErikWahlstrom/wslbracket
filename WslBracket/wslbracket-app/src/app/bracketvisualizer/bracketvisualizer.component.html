@@ -80,34 +80,25 @@
     <br>
     <br>
     <div *ngIf="selectedSurfer !== undefined" class="surfer-detail">
-      Edit surfer info
-      <table>
-        <tr>
-          <td>
-            Name
-          <td>
-            <input type="text" [(ngModel)]="selectedSurfer.name">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Rank
-          </td>
-          <td>
-            {{selectedSurfer.rank}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Actual Rank
-          </td>
-          <td>
-            <input type="number" [(ngModel)]="selectedSurfer.actualRank">
-          </td>
-        </tr>
-      </table>
+      <h3>Edit surfer info</h3>
+      <div>
+        <div>Name</div>
+        <div> <input type="text" [(ngModel)]="selectedSurfer.name"> </div>
+        <div>
+          Rank
+        </div>
+        <div>
+          {{selectedSurfer.rank}}
+        </div>
+        <div>
+          Actual Rank
+        </div>
+        <div>
+          <input type="number" [(ngModel)]="selectedSurfer.actualRank">
+        </div>
+      </div>
       <button (click)="ResetRanking(selectedSurfer)">Reset actual rank</button>
-      <br> Actual rank will only be used for the R3 reseeding.
+      <p>Actual rank will only be used for the R3 reseeding. It will only occur when there is a last minute replacement for a surfer (e.g. due to injury)</p>
     </div>
   </div>
 
