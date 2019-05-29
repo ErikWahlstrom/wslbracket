@@ -243,6 +243,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.surfers = this.getMargiesSurfers();
     this.SetRankings();
     this.GenerateSeeding();
+    this.RerankHeatsMargies();
     this.GenerateLosersRound();
     this.GenerateR32();
   }
@@ -488,6 +489,42 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
     heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
     heat.heatSurfers[2] = this.getSurferFromNumber(1, heat);
+    heat = this.seedingBracket.heats[11];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+  }
+
+
+  RerankHeatsMargies() {
+    let heat = this.seedingBracket.heats[0];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[1];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[2];
+    heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(3, heat);
+    heat = this.seedingBracket.heats[6];
+    heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
+    heat = this.seedingBracket.heats[8];
+    heat.heatSurfers[0] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(3, heat);
+    heat = this.seedingBracket.heats[9];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(2, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(1, heat);
+    heat = this.seedingBracket.heats[10];
+    heat.heatSurfers[0] = this.getSurferFromNumber(3, heat);
+    heat.heatSurfers[1] = this.getSurferFromNumber(1, heat);
+    heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
     heat = this.seedingBracket.heats[11];
     heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
     heat.heatSurfers[1] = this.getSurferFromNumber(3, heat);
