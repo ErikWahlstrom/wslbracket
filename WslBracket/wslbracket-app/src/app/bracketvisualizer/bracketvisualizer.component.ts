@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvents, ThreeManHeat } from '../modeldata/Surfer';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SurferComponent } from '../surfer/surfer.component';
@@ -13,6 +13,7 @@ import { headersToString } from 'selenium-webdriver/http';
 
 export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
+  @ViewChild('mainLayout') elementView!: ElementRef;
   surfers: Surfer[] = [new Surfer('Gabriel Medina')];
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
@@ -31,6 +32,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
   private surfArrayKey = 'surferarray';
+  height: number;
   getBellsBeachSurfers(): Surfer[] {
     return [
       new Surfer('Gabriel Medina'),
@@ -333,6 +335,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       setTimeout(() => this.setSurferLines(list.toArray()));
     });
     setTimeout(() => this.setSurferLines(this.childrenSurf.toArray()));
+    setInterval(() => {
+      this.height = this.elementView.nativeElement.offsetHeight; }, 2000);
   }
 
   setSurferLines(list: SurferComponent[]) {
@@ -762,5 +766,12 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   public ResetRanking(surfer: Surfer) {
     surfer.actualRank = undefined;
+  }
+
+  public getHeight(): number {
+    if (this.height !== undefined) {
+      return this.height + 200;
+    }
+    return 0;
   }
 }

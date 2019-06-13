@@ -1,5 +1,5 @@
 <div class=floatTL>
-  <svg width=3000 height=2000>
+  <svg width=3000 [attr.height]="getHeight()">
     <polyline *ngFor="let surferview of lineCoordArr" [attr.points]="GetPoints(surferview)"
       [attr.class]="surferview.selected ? 'tracking-line-selected' : 'tracking-line'">
     </polyline>
@@ -20,7 +20,7 @@
   </mat-form-field>
 </div>
 
-<div class="flexbox-layout">
+<div class="flexbox-layout" #mainLayout>
 
   <div class="ranking-area mat-body-1">
     <p>Initial event seeding <br> (reseed by dragging up and down)</p>
