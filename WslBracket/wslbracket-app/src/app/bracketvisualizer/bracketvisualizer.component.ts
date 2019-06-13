@@ -22,10 +22,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   bellsEnumVal = surfEvents.BellsBeach;
   keramasEventEnumVal = surfEvents.Keramas;
   margiesEventEnumVal = surfEvents.Margies;
+  rioEventEnumVal = surfEvents.Rio;
   userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.Margies;
+  selectedEvent = surfEvents.Rio;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
@@ -194,6 +195,47 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     ];
   }
 
+  getRioSurfers(): Surfer[] {
+    return [
+      new Surfer('John John Florence'),
+      new Surfer('Italo Ferreira'),
+      new Surfer('Filipe Toledo'),
+      new Surfer('Kolohe Andino'),
+      new Surfer('Gabriel Medina'),
+      new Surfer('Kanoa Igarashi'),
+      new Surfer('Jordy Smith'),
+      new Surfer('Julian Wilson'),
+      new Surfer('Conner Coffin'),
+      new Surfer('Owen Wright'),
+      new Surfer('Ryan Callinan'),
+      new Surfer('Jeremy Flores'),
+      new Surfer('Michel Bourez'),
+      new Surfer('Wade Carmichael'),
+      new Surfer('Seth Moniz'),
+      new Surfer('Kelly Slater'),
+      new Surfer('Michael Rodrigues'),
+      new Surfer('Willian Cardoso'),
+      new Surfer('Peterson Crisanto'),
+      new Surfer('Adrian Buchan'),
+      new Surfer('Yago Dora'),
+      new Surfer('Sebastian Zietz'),
+      new Surfer('Deivid Silva'),
+      new Surfer('Caio Ibelli'),
+      new Surfer('Joan Duru'),
+      new Surfer('Jesse Mendes'),
+      new Surfer('Jack Freestone'),
+      new Surfer('Griffin Colapinto'),
+      new Surfer('Ezekiel Lau'),
+      new Surfer('Ricardo Christie'),
+      new Surfer('Jadson Andre'),
+      new Surfer('Soli Bailey'),
+      new Surfer('Adriano Desouza'),
+      new Surfer('Frederico Morais'),
+      new Surfer('Mateus Herdy'),
+      new Surfer('Seed #36'),
+    ];
+  }
+
   ngOnInit() {
     this.setInitialValues();
   }
@@ -214,6 +256,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesMargies();
     }
 
+    if (this.selectedEvent === surfEvents.Rio) {
+      this.setInitialValuesRio();
+    }
+
     if (this.selectedEvent === surfEvents.User) {
       this.setInitialValuesOwn();
     }
@@ -226,6 +272,14 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     this.RerankHeatsGc();
     this.GenerateLosersRound();
     this.RerankLosersGc();
+    this.GenerateR32();
+  }
+
+  public setInitialValuesRio() {
+    this.surfers = this.getRioSurfers();
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.GenerateLosersRound();
     this.GenerateR32();
   }
 
