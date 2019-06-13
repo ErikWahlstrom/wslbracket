@@ -32,7 +32,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
   selectedSurfer?: Surfer = undefined;
   private surfArrayKey = 'surferarray';
-  height: number;
+  height = 0;
   getBellsBeachSurfers(): Surfer[] {
     return [
       new Surfer('Gabriel Medina'),
