@@ -2,24 +2,24 @@ export class Surfer {
   name: string;
   private _tier = 0;
   get tier(): number {
-      return this._tier;
+    return this._tier;
   }
   set tier(tier: number) {
-      this._tier = tier;
-      if (this.actualRank === undefined) {
-        this.actualTier = tier;
-      }
+    this._tier = tier;
+    if (this.actualRank === undefined) {
+      this.actualTier = tier;
+    }
   }
 
   private _actualRank?: number;
   get actualRank(): number | undefined {
-      return this._actualRank;
+    return this._actualRank;
   }
   set actualRank(actualRank: number | undefined) {
-      this._actualRank = actualRank;
-      if (actualRank !== undefined) {
-        this.actualTier = 4;
-      }
+    this._actualRank = actualRank;
+    if (actualRank !== undefined) {
+      this.actualTier = 4;
+    }
   }
 
   rank = 0;
@@ -57,9 +57,18 @@ export class ThreeManHeat {
   heatSurfer1: HeatSurfer;
   heatSurfer2: HeatSurfer;
   heatSurfer3: HeatSurfer;
-  constructor(heatnumber: number, surfer1: Surfer, surfer2: Surfer, surfer3: Surfer) {
+  constructor(
+    heatnumber: number,
+    surfer1: Surfer,
+    surfer2: Surfer,
+    surfer3: Surfer
+  ) {
     this.heatnumber = heatnumber;
-    this.heatSurfers = [new HeatSurfer(1, surfer1), new HeatSurfer(2, surfer2), new HeatSurfer(3, surfer3)];
+    this.heatSurfers = [
+      new HeatSurfer(1, surfer1),
+      new HeatSurfer(2, surfer2),
+      new HeatSurfer(3, surfer3)
+    ];
     this.heatSurfer1 = this.heatSurfers[0];
     this.heatSurfer2 = this.heatSurfers[1];
     this.heatSurfer3 = this.heatSurfers[2];
@@ -90,7 +99,8 @@ export class SeedingBracket {
       new ThreeManHeat(9, surfers[8], surfers[15], surfers[27]),
       new ThreeManHeat(10, surfers[9], surfers[14], surfers[26]),
       new ThreeManHeat(11, surfers[10], surfers[13], surfers[25]),
-      new ThreeManHeat(12, surfers[11], surfers[12], surfers[24])];
+      new ThreeManHeat(12, surfers[11], surfers[12], surfers[24])
+    ];
   }
 }
 
@@ -102,7 +112,8 @@ export class LosersBracket {
       new ThreeManHeat(1, orderedArray[0], orderedArray[7], orderedArray[11]),
       new ThreeManHeat(2, orderedArray[1], orderedArray[6], orderedArray[10]),
       new ThreeManHeat(3, orderedArray[2], orderedArray[5], orderedArray[9]),
-      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8]), ];
+      new ThreeManHeat(4, orderedArray[3], orderedArray[4], orderedArray[8])
+    ];
   }
 
   getSurfersFromSeeding(surfers: SeedingBracket) {
@@ -118,18 +129,16 @@ export class RoundOf32 {
   heats: TwoManHeat[];
   orderedSurfers: Surfer[];
   constructor(seededSurfers: SeedingBracket, surfersFromLosers: LosersBracket) {
-
-
-
     seededSurfers.heats.forEach(element => {
       element.heatSurfers[0].surfer.roundOneResult = 1;
       element.heatSurfers[1].surfer.roundOneResult = 2;
       element.heatSurfers[2].surfer.roundOneResult = 3;
     });
 
-    const qualifiedSurfers =
-      surfersFromLosers.heats.concat(seededSurfers.heats).map(
-        x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer]).reduce((a, b) => a.concat(b));
+    const qualifiedSurfers = surfersFromLosers.heats
+      .concat(seededSurfers.heats)
+      .map(x => [x.heatSurfers[0].surfer, x.heatSurfers[1].surfer])
+      .reduce((a, b) => a.concat(b));
 
     qualifiedSurfers.sort((x, y) => {
       if (x.getActualTier() !== y.getActualTier()) {
@@ -148,7 +157,6 @@ export class RoundOf32 {
 
     this.orderedSurfers = qualifiedSurfers;
     this.heats = [
-
       new TwoManHeat(1, qualifiedSurfers[2], qualifiedSurfers[29]),
       new TwoManHeat(2, qualifiedSurfers[13], qualifiedSurfers[31 - 13]),
       new TwoManHeat(3, qualifiedSurfers[5], qualifiedSurfers[31 - 5]),
@@ -164,8 +172,7 @@ export class RoundOf32 {
       new TwoManHeat(13, qualifiedSurfers[3], qualifiedSurfers[28]),
       new TwoManHeat(14, qualifiedSurfers[12], qualifiedSurfers[31 - 12]),
       new TwoManHeat(15, qualifiedSurfers[11], qualifiedSurfers[31 - 11]),
-      new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31 - 4]),
-
+      new TwoManHeat(16, qualifiedSurfers[4], qualifiedSurfers[31 - 4])
     ];
   }
 
@@ -192,5 +199,5 @@ export enum surfEvents {
   None,
   Margies,
   Rio,
+  SurfRange
 }
-

@@ -1,20 +1,35 @@
-import { Component, OnInit, ViewChildren, ViewChild, ElementRef, QueryList, AfterViewInit } from '@angular/core';
-import { Surfer, SeedingBracket, HeatSurfer, LosersBracket, RoundOf32, surfEvents, ThreeManHeat } from '../modeldata/Surfer';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { SurferComponent } from '../surfer/surfer.component';
-import { LineCoordinates, Coords } from './lineCoordinates';
-import { headersToString } from 'selenium-webdriver/http';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  ViewChild,
+  ElementRef,
+  QueryList,
+  AfterViewInit
+} from "@angular/core";
+import {
+  Surfer,
+  SeedingBracket,
+  HeatSurfer,
+  LosersBracket,
+  RoundOf32,
+  surfEvents,
+  ThreeManHeat
+} from "../modeldata/Surfer";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { SurferComponent } from "../surfer/surfer.component";
+import { LineCoordinates, Coords } from "./lineCoordinates";
+import { headersToString } from "selenium-webdriver/http";
 
 @Component({
-  selector: 'app-bracketvisualizer',
-  templateUrl: './bracketvisualizer.component.html',
-  styleUrls: ['./bracketvisualizer.component.scss']
+  selector: "app-bracketvisualizer",
+  templateUrl: "./bracketvisualizer.component.html",
+  styleUrls: ["./bracketvisualizer.component.scss"]
 })
-
 export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   @ViewChildren(SurferComponent) childrenSurf!: QueryList<SurferComponent>;
-  @ViewChild('mainLayout') elementView!: ElementRef;
-  surfers: Surfer[] = [new Surfer('Gabriel Medina')];
+  @ViewChild("mainLayout") elementView!: ElementRef;
+  surfers: Surfer[] = [new Surfer("Gabriel Medina")];
   seedingBracket!: SeedingBracket;
   tier1Limit = 4;
   tier2Limit = 12;
@@ -24,217 +39,261 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   keramasEventEnumVal = surfEvents.Keramas;
   margiesEventEnumVal = surfEvents.Margies;
   rioEventEnumVal = surfEvents.Rio;
+  surfRangeEventEnumVal = surfEvents.SurfRange;
   userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.Rio;
+  selectedEvent = surfEvents.SurfRange;
   allSurferViews!: SurferComponent[];
-  lineCoordArr: LineCoordinates[] = [new LineCoordinates([new Coords(1, 1)], false)];
+  lineCoordArr: LineCoordinates[] = [
+    new LineCoordinates([new Coords(1, 1)], false)
+  ];
   selectedSurfer?: Surfer = undefined;
-  private surfArrayKey = 'surferarray';
+  private surfArrayKey = "surferarray";
   height = 0;
   getBellsBeachSurfers(): Surfer[] {
     return [
-      new Surfer('Gabriel Medina'),
-      new Surfer('Julian Wilson'),
-      new Surfer('Italo Ferreira'),
-      new Surfer('Filipe Toledo'),
-      new Surfer('Jordy Smith'),
-      new Surfer('Owen Wright'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Wade Carmichael'),
-      new Surfer('Michel Bourez'),
-      new Surfer('John John Florence'),
-      new Surfer('Kanoa Igarashi'),
-      new Surfer('Mikey Wright'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Reef Heazlewood', 34),
-      new Surfer('Yago Dora'),
-      new Surfer('Seth Moniz'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Adrian Buchan'),
-      new Surfer('Xavier Huxtable', 35),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Joan Duru'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Jesse Mendes'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Ricardo Christie'),
-      new Surfer('Soli Bailey'),
-      new Surfer('Leonardi Fiorivanti'),
-      new Surfer('Jadson Andre'),
-      new Surfer('Jack Freestone'),
-      new Surfer('Kelly Slater'),
-      new Surfer('Caio Ibelli'),
-      new Surfer('Jacob Willcox'),
-      new Surfer('Harrison Mann', 36),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Filipe Toledo"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Owen Wright"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Michel Bourez"),
+      new Surfer("John John Florence"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Mikey Wright"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Reef Heazlewood", 34),
+      new Surfer("Yago Dora"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Xavier Huxtable", 35),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Joan Duru"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Leonardi Fiorivanti"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Jacob Willcox"),
+      new Surfer("Harrison Mann", 36)
     ];
   }
 
   getKeramasSurfers(): Surfer[] {
     return [
-      new Surfer('Gabriel Medina'),
-      new Surfer('Filipe Toledo'),
-      new Surfer('Italo Ferreira'),
-      new Surfer('Julian Wilson'),
-      new Surfer('Jordy Smith'),
-      new Surfer('John John Florence'),
-      new Surfer('Owen Wright'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Wade Carmichael'),
-      new Surfer('Kanoa Igarashi'),
-      new Surfer('Michel Bourez'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Mikey Wright'),
-      new Surfer('Seth Moniz'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Yago Dora'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Sebastian Zietz'),
-      new Surfer('Adrian Buchan'),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Griffin Colapinto'),
-      new Surfer('Joan Duru'),
-      new Surfer('Ricardo Christie'),
-      new Surfer('Kelly Slater'),
-      new Surfer('Jesse Mendes'),
-      new Surfer('Soli Bailey'),
-      new Surfer('Leonardi Fiorivanti'),
-      new Surfer('Jadson Andre'),
-      new Surfer('Jack Freestone'),
-      new Surfer('Caio Ibelli'),
-      new Surfer('Jacob Willcox'),
-      new Surfer('Rio Waida'),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Filipe Toledo"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Jordy Smith"),
+      new Surfer("John John Florence"),
+      new Surfer("Owen Wright"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Mikey Wright"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Yago Dora"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Joan Duru"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Leonardi Fiorivanti"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Jacob Willcox"),
+      new Surfer("Rio Waida")
     ];
   }
 
   getMargiesSurfers(): Surfer[] {
     return [
-      new Surfer('Filipe Toledo'),
-      new Surfer('Gabriel Medina'),
-      new Surfer('Italo Ferreira'),
-      new Surfer('Julian Wilson'),
-      new Surfer('Kanoa Igarashi'),
-      new Surfer('John John Florence'),
-      new Surfer('Jordy Smith'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Wade Carmichael'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Owen Wright'),
-      new Surfer('Michel Bourez'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Seth Moniz'),
-      new Surfer('Adrian Buchan'),
-      new Surfer('Kelly Slater'),
-      new Surfer('Yago Dora'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Joan Duru'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Sebastian Zietz'),
-      new Surfer('Griffin Colapinto'),
-      new Surfer('Jesse Mendes'),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Leonardi Fiorivanti'),
-      new Surfer('Jack Freestone'),
-      new Surfer('Ricardo Christie'),
-      new Surfer('Jadson Andre'),
-      new Surfer('Soli Bailey'),
-      new Surfer('Caio Ibelli'),
-      new Surfer('Frederico Morais'),
-      new Surfer('Jacob Willcox'),
-      new Surfer('Jack Robinson'),
+      new Surfer("Filipe Toledo"),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("John John Florence"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Owen Wright"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Yago Dora"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Joan Duru"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Leonardi Fiorivanti"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Frederico Morais"),
+      new Surfer("Jacob Willcox"),
+      new Surfer("Jack Robinson")
     ];
   }
 
   getGoldCoastSurfers(): Surfer[] {
     return [
-      new Surfer('Gabriel Medina'),
-      new Surfer('Julian Wilson'),
-      new Surfer('Filipe Toledo'),
-      new Surfer('Italo Ferreira'),
-      new Surfer('Jordy Smith'),
-      new Surfer('Owen Wright'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Michel Bourez'),
-      new Surfer('Wade Carmichael'),
-      new Surfer('Kanoa Igarashi'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Mikey Wright'),
-      new Surfer('John John Florence'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Sebastian Zietz'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Adrian Buchan'),
-      new Surfer('Griffin Colapinto'),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Yago Dora'),
-      new Surfer('Joan Duru'),
-      new Surfer('Seth Moniz'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Jesse Mendes'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Ricardo Christie'),
-      new Surfer('Leonardi Fiorivanti'),
-      new Surfer('Jadson Andre'),
-      new Surfer('Soli Bailey'),
-      new Surfer('Jack Freestone'),
-      new Surfer('Kelly Slater'),
-      new Surfer('Caio Ibelli'),
-      new Surfer('Reef Heazlewood'),
-      new Surfer('Mateus Herdy'),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Filipe Toledo"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Owen Wright"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Mikey Wright"),
+      new Surfer("John John Florence"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Yago Dora"),
+      new Surfer("Joan Duru"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Leonardi Fiorivanti"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Reef Heazlewood"),
+      new Surfer("Mateus Herdy")
     ];
   }
 
   getRioSurfers(): Surfer[] {
     return [
-      new Surfer('John John Florence'),
-      new Surfer('Italo Ferreira'),
-      new Surfer('Filipe Toledo'),
-      new Surfer('Kolohe Andino'),
-      new Surfer('Gabriel Medina'),
-      new Surfer('Kanoa Igarashi'),
-      new Surfer('Jordy Smith'),
-      new Surfer('Julian Wilson'),
-      new Surfer('Conner Coffin'),
-      new Surfer('Owen Wright'),
-      new Surfer('Ryan Callinan'),
-      new Surfer('Jeremy Flores'),
-      new Surfer('Michel Bourez'),
-      new Surfer('Wade Carmichael'),
-      new Surfer('Seth Moniz'),
-      new Surfer('Kelly Slater'),
-      new Surfer('Michael Rodrigues'),
-      new Surfer('Willian Cardoso'),
-      new Surfer('Peterson Crisanto'),
-      new Surfer('Adrian Buchan'),
-      new Surfer('Yago Dora'),
-      new Surfer('Sebastian Zietz'),
-      new Surfer('Deivid Silva'),
-      new Surfer('Caio Ibelli'),
-      new Surfer('Joan Duru'),
-      new Surfer('Jesse Mendes'),
-      new Surfer('Jack Freestone'),
-      new Surfer('Griffin Colapinto'),
-      new Surfer('Ezekiel Lau'),
-      new Surfer('Ricardo Christie'),
-      new Surfer('Jadson Andre'),
-      new Surfer('Soli Bailey'),
-      new Surfer('Adriano Desouza'),
-      new Surfer('Frederico Morais'),
-      new Surfer('Mateus Herdy'),
-      new Surfer('Seed #36'),
+      new Surfer("John John Florence"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Filipe Toledo"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Owen Wright"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Yago Dora"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Joan Duru"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Adriano Desouza"),
+      new Surfer("Frederico Morais"),
+      new Surfer("Seed #35"),
+      new Surfer("Seed #36")
+    ];
+  }
+
+  getSurfRangeSurfers(): Surfer[] {
+    return [
+      new Surfer("Felipe Toledo"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Gabriel Medina"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Owen Wright"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Joan Duru"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Yago Dora"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Adriano de Souza"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Frederico Morais"),
+      new Surfer("Mikey Wright"),
+      new Surfer("Seed #30"),
+      new Surfer("Seed #31")
     ];
   }
 
@@ -262,6 +321,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesRio();
     }
 
+    if (this.selectedEvent === surfEvents.SurfRange) {
+      this.setInitialValuesSurfRange();
+    }
+
     if (this.selectedEvent === surfEvents.User) {
       this.setInitialValuesOwn();
     }
@@ -279,6 +342,14 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   public setInitialValuesRio() {
     this.surfers = this.getRioSurfers();
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.GenerateLosersRound();
+    this.GenerateR32();
+  }
+
+  public setInitialValuesSurfRange() {
+    this.surfers = this.getSurfRangeSurfers();
     this.SetRankings();
     this.GenerateSeeding();
     this.GenerateLosersRound();
@@ -336,7 +407,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     });
     setTimeout(() => this.setSurferLines(this.childrenSurf.toArray()));
     setInterval(() => {
-      this.height = this.elementView.nativeElement.offsetHeight; }, 2000);
+      this.height = this.elementView.nativeElement.offsetHeight;
+    }, 2000);
   }
 
   setSurferLines(list: SurferComponent[]) {
@@ -349,12 +421,19 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.surfers.forEach(x => {
         this.lineCoordArr.push(
           new LineCoordinates(
-            this.allSurferViews.filter(y => y.surfer.name === x.name)
-              .map(viewSurfer => (
-                {
-                  x: viewSurfer.elRef.nativeElement.getBoundingClientRect().left + window.pageXOffset,
-                  y: viewSurfer.elRef.nativeElement.getBoundingClientRect().top + window.pageYOffset,
-                })), this.selectedSurfer === x));
+            this.allSurferViews
+              .filter(y => y.surfer.name === x.name)
+              .map(viewSurfer => ({
+                x:
+                  viewSurfer.elRef.nativeElement.getBoundingClientRect().left +
+                  window.pageXOffset,
+                y:
+                  viewSurfer.elRef.nativeElement.getBoundingClientRect().top +
+                  window.pageYOffset
+              })),
+            this.selectedSurfer === x
+          )
+        );
       });
     }
   }
@@ -377,7 +456,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.GenerateR32();
       let save = true;
       if (this.selectedEvent !== surfEvents.User) {
-        save = confirm('Save change to users event?');
+        save = confirm("Save change to users event?");
       }
       if (save) {
         localStorage.setItem(this.surfArrayKey, JSON.stringify(this.surfers));
@@ -388,7 +467,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   SetRankings() {
     for (let index = 0; index < this.surfers.length; index++) {
-      const replacementSurfers = this.surfers.filter(x => (x.actualRank !== undefined) && (this.surfers.indexOf(x) < index)).length;
+      const replacementSurfers = this.surfers.filter(
+        x => x.actualRank !== undefined && this.surfers.indexOf(x) < index
+      ).length;
       const rank = index + 1 - replacementSurfers;
       const surfer = this.surfers[index];
       surfer.rank = rank;
@@ -553,7 +634,6 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     heat.heatSurfers[2] = this.getSurferFromNumber(2, heat);
   }
 
-
   RerankHeatsMargies() {
     let heat = this.seedingBracket.heats[0];
     heat.heatSurfers[0] = this.getSurferFromNumber(1, heat);
@@ -643,7 +723,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   RerankHeatsOwn() {
     this.seedingBracket.heats.forEach(heat => {
-      const seedOrderString = localStorage.getItem('seedHeat' + heat.heatnumber);
+      const seedOrderString = localStorage.getItem(
+        "seedHeat" + heat.heatnumber
+      );
       if (seedOrderString !== null) {
         const heatOrder = JSON.parse(seedOrderString);
         heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
@@ -656,7 +738,9 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   RerankHeatsOwnLoser() {
     this.losersRound.heats.forEach(heat => {
-      const heatOrderString = localStorage.getItem('loserHeat' + heat.heatnumber);
+      const heatOrderString = localStorage.getItem(
+        "loserHeat" + heat.heatnumber
+      );
       if (heatOrderString !== null) {
         const heatOrder = JSON.parse(heatOrderString);
         heat.heatSurfers[0] = this.getSurferFromNumber(heatOrder[0], heat);
@@ -676,8 +760,7 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       case 3:
         return heat.heatSurfer3;
     }
-    throw new Error('Non existing surfer in heat');
-
+    throw new Error("Non existing surfer in heat");
   }
 
   onDropSeed(event: CdkDragDrop<string[]>) {
@@ -687,18 +770,20 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
       let save = true;
       if (this.selectedEvent !== surfEvents.User) {
-        save = confirm('Save change to users event?');
+        save = confirm("Save change to users event?");
       }
       if (save) {
-
         for (let index = 0; index < this.seedingBracket.heats.length; index++) {
           const element = this.seedingBracket.heats[index];
-          localStorage.setItem('seedHeat' + element.heatnumber, this.getStorageString(element));
+          localStorage.setItem(
+            "seedHeat" + element.heatnumber,
+            this.getStorageString(element)
+          );
         }
         this.selectedEvent = surfEvents.User;
       }
 
-      this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
+      this.ReorderHeat((arrayWithData as unknown) as HeatSurfer[]);
       this.GenerateLosersRound();
       this.GenerateR32();
     }
@@ -707,7 +792,8 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     const arrayToSave = [
       this.getNumberFromArray(element.heatSurfers[0], element),
       this.getNumberFromArray(element.heatSurfers[1], element),
-      this.getNumberFromArray(element.heatSurfers[2], element)];
+      this.getNumberFromArray(element.heatSurfers[2], element)
+    ];
     return JSON.stringify(arrayToSave);
   }
   getNumberFromArray(surfer: HeatSurfer, heatSurfers: ThreeManHeat) {
@@ -727,18 +813,20 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
       let save = true;
       if (this.selectedEvent !== surfEvents.User) {
-        save = confirm('Save change to users event?');
+        save = confirm("Save change to users event?");
       }
       if (save) {
-
         for (let index = 0; index < this.seedingBracket.heats.length; index++) {
           const element = this.seedingBracket.heats[index];
-          localStorage.setItem('loserHeat' + element.heatnumber, this.getStorageString(element));
+          localStorage.setItem(
+            "loserHeat" + element.heatnumber,
+            this.getStorageString(element)
+          );
         }
 
         this.selectedEvent = surfEvents.User;
       }
-      this.ReorderHeat(arrayWithData as unknown as HeatSurfer[]);
+      this.ReorderHeat((arrayWithData as unknown) as HeatSurfer[]);
       this.GenerateR32();
     }
   }
@@ -748,13 +836,12 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       const rank = index + 1;
       arrayWithData[index].heatRank = rank;
     }
-
   }
 
   GetPoints(linecorr: LineCoordinates) {
-    let retString = '';
+    let retString = "";
     linecorr.lineCoords.forEach(x => {
-      retString = retString + ' ' + x.x + ',' + x.y;
+      retString = retString + " " + x.x + "," + x.y;
     });
     return retString;
   }
