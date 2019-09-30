@@ -199,5 +199,6 @@ export enum surfEvents {
   None,
   Margies,
   Rio,
-  SurfRange
+  SurfRange,
+  France
 }

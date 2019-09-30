@@ -40,10 +40,11 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
   margiesEventEnumVal = surfEvents.Margies;
   rioEventEnumVal = surfEvents.Rio;
   surfRangeEventEnumVal = surfEvents.SurfRange;
+  franceEnumVal = surfEvents.France;
   userEventEnumVal = surfEvents.User;
   losersRound!: LosersBracket;
   roundOf32!: RoundOf32;
-  selectedEvent = surfEvents.SurfRange;
+  selectedEvent = surfEvents.France;
   allSurferViews!: SurferComponent[];
   lineCoordArr: LineCoordinates[] = [
     new LineCoordinates([new Coords(1, 1)], false)
@@ -297,6 +298,47 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
     ];
   }
 
+  getFranceSurfers(): Surfer[] {
+    return [
+      new Surfer("Gabriel Medina"),
+      new Surfer("Felipe Toledo"),
+      new Surfer("Jordy Smith"),
+      new Surfer("Kolohe Andino"),
+      new Surfer("Italo Ferreira"),
+      new Surfer("Kanoa Igarashi"),
+      new Surfer("Owen Wright"),
+      new Surfer("Julian Wilson"),
+      new Surfer("Kelly Slater"),
+      new Surfer("Seth Moniz"),
+      new Surfer("Ryan Callinan"),
+      new Surfer("Michel Bourez"),
+      new Surfer("Jeremy Flores"),
+      new Surfer("Deivid Silva"),
+      new Surfer("Wade Carmichael"),
+      new Surfer("Conner Coffin"),
+      new Surfer("Adrian Buchan"),
+      new Surfer("Willian Cardoso"),
+      new Surfer("Griffin Colapinto"),
+      new Surfer("Caio Ibelli"),
+      new Surfer("Yago Dora"),
+      new Surfer("Sebastian Zietz"),
+      new Surfer("Joan Duru"),
+      new Surfer("Michael Rodrigues"),
+      new Surfer("Jack Freestone"),
+      new Surfer("Peterson Crisanto"),
+      new Surfer("Ezekiel Lau"),
+      new Surfer("Jesse Mendes"),
+      new Surfer("Jadson Andre"),
+      new Surfer("Ricardo Christie"),
+      new Surfer("Soli Bailey"),
+      new Surfer("Frederico Morais"),
+      new Surfer("Leonardo Fioravanti"),
+      new Surfer("J. Couzinet"),
+      new Surfer("M. Lacomare"),
+      new Surfer("M. Mignot")
+    ];
+  }
+
   ngOnInit() {
     this.setInitialValues();
   }
@@ -325,6 +367,10 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
       this.setInitialValuesSurfRange();
     }
 
+    if (this.selectedEvent === surfEvents.France) {
+      this.setInitialValuesFrance();
+    }
+
     if (this.selectedEvent === surfEvents.User) {
       this.setInitialValuesOwn();
     }
@@ -350,6 +396,14 @@ export class BracketvisualizerComponent implements OnInit, AfterViewInit {
 
   public setInitialValuesSurfRange() {
     this.surfers = this.getSurfRangeSurfers();
+    this.SetRankings();
+    this.GenerateSeeding();
+    this.GenerateLosersRound();
+    this.GenerateR32();
+  }
+
+  public setInitialValuesFrance() {
+    this.surfers = this.getFranceSurfers();
     this.SetRankings();
     this.GenerateSeeding();
     this.GenerateLosersRound();

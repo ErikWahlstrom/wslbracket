@@ -1,3 +1,13 @@
 <span class="mat-body-1">
-  {{surfer.name}}, Rank: {{surfer.rank}} <span *ngIf="surfer.actualRank !== undefined" class="actualRank" > Rank {{surfer.actualRank}}</span> <img height=12 *ngIf="surfer.roundOneResult === 1" img src="assets/winner.svg">
+  {{ surfer.name }}, Rank: {{ surfer.rank }}
+  &nbsp;
+  <span *ngIf="surfer.actualRank !== undefined" class="actualRank">
+    Rank {{ surfer.actualRank }}
+  </span>
+  <img
+    height="12"
+    *ngIf="surfer.roundOneResult === 1"
+    img
+    src="assets/winner.svg"
+  />
 </span>
