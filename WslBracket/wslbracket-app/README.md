@@ -1,3 +1,17 @@
+# Deployement
+
+https://alligator.io/angular/deploying-angular-app-github-pages/
+
+In the terminal run:
+
+ng build --prod --base-href "https://erikwahlstrom.github.io/wslbracket/"
+
+then:
+
+ngh
+
+That should be it.
+
 # WslbracketApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
